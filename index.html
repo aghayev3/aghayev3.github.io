@@ -3,723 +3,395 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Babak Aghayev · Cybersecurity Professional · Blue Team · SOC · DFIR · AD Security · Baku, Azerbaijan">
-    <title>aghayev3 — Babak Aghayev — Cybersecurity</title>
+    <meta name="description" content="Babak Aghayev — Cybersecurity Professional — Blue Team, SOC, DFIR, Active Directory Security">
+    <title>babak aghayev — aghayev3</title>
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            /* warm espresso / tea-house-at-night palette */
-            --bg:         #0d0a07;   /* dark espresso */
-            --bg-panel:   #131008;   /* dark walnut */
-            --bg-card:    #0f0c07;   /* deeper shadow */
-            --border:     #30200e;   /* sepia border */
-            --border-hi:  #4a3018;   /* warm highlight border */
-            --text:       #c8b48a;   /* candlelight cream */
-            --text-dim:   #6a5238;   /* warm muted brown */
-            --text-hi:    #e8d0a0;   /* bright warm cream */
-            --amber:      #e09428;   /* lantern amber — primary */
-            --amber-hi:   #f0b848;   /* warm gold highlight */
-            --amber-dim:  #5c3a0a;   /* dark amber */
-            --terra:      #b85e38;   /* terracotta — Icheri Sheher stone */
-            --terra-dim:  #6a2e18;   /* dark terracotta */
-            --teal:       #4a8870;   /* Caspian teal — links */
-            --teal-hi:    #62aa8a;   /* bright teal */
-            --teal-dim:   #284e40;   /* dark teal */
-            --sage:       #7a9868;   /* muted sage — status */
+            --bg:     #1a1a1a;
+            --fg:     #b0b0b0;
+            --dim:    #555;
+            --hi:     #d8d8d8;
+            --accent: #c8963a;
+            --border: #2a2a2a;
         }
 
         html { scroll-behavior: smooth; }
 
         body {
-            background-color: var(--bg);
-            /* warm amber dot grid — like distant city lights */
-            background-image: radial-gradient(rgba(200, 140, 60, 0.07) 1px, transparent 1px);
-            background-size: 24px 24px;
-            color: var(--text);
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            background: var(--bg);
+            color: var(--fg);
+            font-family: 'SF Mono', 'Cascadia Code', Consolas, 'Liberation Mono', Menlo, monospace;
             font-size: 13px;
             line-height: 1.75;
-            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* warm vignette — like lamplight fading at the edges */
-        body::before {
-            content: '';
-            position: fixed; top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: radial-gradient(ellipse at 50% 30%, transparent 45%, rgba(10, 6, 2, 0.82) 100%);
-            pointer-events: none;
-            z-index: 9998;
-        }
-
-        /* very subtle warm scanlines */
-        body::after {
-            content: '';
-            position: fixed; top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: repeating-linear-gradient(
-                0deg,
-                transparent 0px, transparent 2px,
-                rgba(0, 0, 0, 0.04) 2px, rgba(0, 0, 0, 0.04) 3px
-            );
-            pointer-events: none;
-            z-index: 9999;
-        }
-
-        /* lofi film grain — animated noise overlay */
-        #grain {
-            position: fixed; top: -50%; left: -50%;
-            width: 200%; height: 200%;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-            opacity: 0.032;
-            pointer-events: none;
-            z-index: 9997;
-            animation: grain 9s steps(10) infinite;
-        }
-        @keyframes grain {
-            0%  { transform: translate(0,0); }
-            10% { transform: translate(-4%,-9%); }
-            20% { transform: translate(5%,-14%); }
-            30% { transform: translate(-7%, 6%); }
-            40% { transform: translate(11%, 8%); }
-            50% { transform: translate(-3%, 2%); }
-            60% { transform: translate(8%,-7%); }
-            70% { transform: translate(-5%, 11%); }
-            80% { transform: translate(6%,-4%); }
-            90% { transform: translate(-2%, 8%); }
-        }
-
-        /* ── TOP BAR ── */
-        #topbar {
-            background: #080603;
-            border-bottom: 1px solid var(--border);
-            padding: 4px 18px;
-            font-family: 'Courier New', monospace;
-            font-size: 10px;
-            color: var(--text-dim);
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            align-items: center;
-        }
-        #topbar .online { color: var(--sage); }
-        #topbar .sep { color: var(--border); }
-
-        /* ── MAIN WRAPPER ── */
-        #site {
-            max-width: 920px;
+        main {
+            max-width: 720px;
             margin: 0 auto;
-            padding: 20px 18px 52px;
+            padding: 48px 24px 64px;
         }
 
-        /* ── PANEL SYSTEM ── */
-        .panel {
-            border: 1px solid var(--border);
-            background: var(--bg-panel);
-            margin-bottom: 14px;
-            border-radius: 2px;
-        }
-
-        .panel-bar {
-            background: linear-gradient(90deg, #231508 0%, var(--bg-panel) 100%);
-            border-bottom: 1px solid var(--border);
-            padding: 5px 11px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-family: 'Courier New', monospace;
-            font-size: 11px;
-            border-radius: 2px 2px 0 0;
-        }
-        .pt { color: var(--amber); letter-spacing: 1px; }
-        .pc { color: var(--border-hi); letter-spacing: 3px; font-size: 9px; }
-
-        .panel-body { padding: 16px 18px; }
-
-        /* ── HEADER ── */
-        #header-panel .hdr-body {
-            padding: 34px 18px 30px;
-            text-align: center;
-        }
-        .hdr-name {
-            font-family: Verdana, sans-serif;
-            font-size: 30px;
+        /* header */
+        header { margin-bottom: 24px; }
+        .name {
+            font-size: 22px;
             font-weight: bold;
-            color: var(--text-hi);
-            letter-spacing: 5px;
-            /* warm amber lantern glow — not cold blue */
-            text-shadow:
-                0 0 20px rgba(220, 148, 40, 0.7),
-                0 0 50px rgba(220, 148, 40, 0.25),
-                0 2px 4px rgba(0,0,0,0.8);
-            margin-bottom: 8px;
-        }
-        .hdr-handle {
-            font-family: 'Courier New', monospace;
-            font-size: 13px;
-            color: var(--amber);
-            text-shadow: 0 0 10px rgba(220,148,40,.5);
-            letter-spacing: 3px;
-            margin-bottom: 14px;
-        }
-        .hdr-rule {
-            color: var(--border-hi);
-            font-size: 13px;
-            letter-spacing: 2px;
-            margin-bottom: 14px;
-        }
-        .hdr-tags {
-            font-size: 12px;
-            color: var(--text-dim);
+            color: var(--accent);
             letter-spacing: 1px;
-            margin-bottom: 12px;
+            margin-bottom: 2px;
         }
-        .hdr-tags .dot { margin: 0 8px; color: var(--border-hi); }
-        .hdr-meta {
-            font-family: 'Courier New', monospace;
-            font-size: 11px;
-            color: var(--text-dim);
-        }
-        .hdr-meta .msep { margin: 0 10px; color: var(--border); }
-        .hdr-meta .online-dot { color: var(--sage); }
-
-        /* ── NAV ── */
-        #nav-panel { margin-bottom: 18px; }
-        .nav-inner { display: flex; flex-wrap: wrap; }
-        .nav-a {
-            display: inline-block;
-            padding: 8px 16px;
-            color: var(--text-dim);
-            text-decoration: none;
-            font-size: 11px;
-            letter-spacing: 1.5px;
-            font-family: Verdana, sans-serif;
-            border-right: 1px solid var(--border);
-        }
-        .nav-a:hover { background: #1a1108; color: var(--amber); }
-
-        /* ── ABOUT ── */
-        .intro {
+        .handle {
             font-size: 13px;
-            color: var(--text-hi);
+            color: var(--dim);
             margin-bottom: 14px;
+        }
+        .tagline { color: var(--fg); margin-bottom: 4px; }
+        .location { color: var(--dim); font-size: 12px; }
+
+        /* nav */
+        nav {
+            margin: 20px 0 0;
+            font-size: 12px;
+        }
+        nav a {
+            color: var(--dim);
+            text-decoration: none;
+        }
+        nav a:hover { color: var(--accent); }
+        nav .sep { color: var(--border); margin: 0 6px; }
+
+        /* sections */
+        section { margin-bottom: 0; }
+        h2 {
+            font-size: 13px;
+            font-weight: normal;
+            color: var(--dim);
+            text-transform: lowercase;
+            letter-spacing: 3px;
+            margin-bottom: 18px;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 36px 0;
+        }
+
+        /* about */
+        .intro {
+            color: var(--hi);
+            margin-bottom: 18px;
             line-height: 1.85;
         }
-        .intro strong { color: var(--amber-hi); }
 
-        .fact { display: flex; padding: 6px 0; border-bottom: 1px solid var(--border); width: 100%; }
-        .fact:last-child { border-bottom: none; }
-        .fact-label {
-            font-family: 'Courier New', monospace;
+        /* definition lists — shared by about, skills, contact */
+        dl { margin: 0; }
+        dt {
+            color: var(--accent);
             font-size: 11px;
-            color: var(--amber);
-            min-width: 130px;
-            flex-shrink: 0;
-            padding-top: 1px;
-        }
-        .fact-val { font-size: 12px; color: var(--text); line-height: 1.7; }
-        .fact-val .hi { color: var(--text-hi); font-weight: bold; }
-
-        /* ── PROJECTS ── */
-        .proj-card {
-            border: 1px solid var(--border);
-            background: var(--bg-card);
-            margin-bottom: 12px;
-            border-radius: 2px;
-        }
-        .proj-card:last-child { margin-bottom: 0; }
-        .proj-card.feat { border-color: var(--terra-dim); }
-
-        .proj-top {
-            background: linear-gradient(90deg, #1e1005 0%, var(--bg-card) 100%);
-            border-bottom: 1px solid var(--border);
-            padding: 7px 12px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            align-items: center;
-            border-radius: 2px 2px 0 0;
-        }
-        .proj-card.feat .proj-top {
-            background: linear-gradient(90deg, #281408 0%, var(--bg-card) 100%);
-            border-bottom-color: var(--terra-dim);
-        }
-
-        .proj-num { font-family: 'Courier New', monospace; font-size: 11px; color: var(--text-dim); }
-        .proj-title { font-family: Verdana, sans-serif; font-size: 13px; font-weight: bold; color: var(--amber); }
-        .proj-card.feat .proj-title { text-shadow: 0 0 10px rgba(220,148,40,.3); }
-
-        .badge {
-            font-family: 'Courier New', monospace;
-            font-size: 9px;
-            padding: 1px 5px;
-            border: 1px solid currentColor;
-            letter-spacing: .5px;
-            white-space: nowrap;
-        }
-        .badge-warm  { color: var(--terra-dim); }
-        .badge-muted { color: var(--teal-dim); }
-
-        .proj-body { padding: 12px 14px; }
-        .proj-role { font-family: 'Courier New', monospace; font-size: 11px; color: var(--text-dim); margin-bottom: 8px; }
-        .proj-desc { font-size: 12px; color: var(--text); margin-bottom: 8px; line-height: 1.8; }
-        .proj-desc .hi { color: var(--text-hi); }
-        .proj-stack { font-family: 'Courier New', monospace; font-size: 11px; color: var(--text-dim); margin-bottom: 6px; }
-        .proj-stack .lbl { color: var(--teal); }
-        .proj-link { font-family: 'Courier New', monospace; font-size: 11px; }
-        .proj-link a { color: var(--teal-dim); text-decoration: none; }
-        .proj-link a:hover { color: var(--amber); }
-
-        /* ── SKILLS TABLE ── */
-        .skills-dl { display: grid; grid-template-columns: 170px 1fr; }
-        .skills-dl dt {
-            font-family: 'Courier New', monospace;
-            font-size: 11px;
-            color: var(--amber);
-            padding: 7px 14px 7px 0;
-            border-bottom: 1px solid var(--border);
-            letter-spacing: .5px;
+            letter-spacing: 1px;
             text-transform: uppercase;
-            align-self: start;
+            margin-top: 12px;
         }
-        .skills-dl dd {
+        dt:first-of-type { margin-top: 0; }
+        dd {
+            color: var(--fg);
             font-size: 12px;
-            color: var(--text);
-            padding: 7px 0;
-            border-bottom: 1px solid var(--border);
-            line-height: 1.65;
+            margin: 2px 0 0;
+            line-height: 1.7;
         }
-        .skills-dl dt:last-of-type,
-        .skills-dl dd:last-of-type { border-bottom: none; }
+        dd .hi { color: var(--hi); }
 
-        /* ── CERTS ── */
-        .cert-row {
-            display: flex;
-            align-items: baseline;
-            gap: 12px;
-            padding: 7px 0;
-            border-bottom: 1px solid var(--border);
+        /* projects */
+        .project {
+            padding-left: 14px;
+            border-left: 2px solid var(--border);
+            margin-bottom: 28px;
         }
-        .cert-row:last-child { border-bottom: none; }
-        .cert-name { font-size: 13px; color: var(--text-hi); flex: 1; }
-        .cert-date { font-family: 'Courier New', monospace; font-size: 11px; color: var(--text-dim); white-space: nowrap; }
+        .project:last-child { margin-bottom: 0; }
+        .project.feat { border-left-color: var(--accent); }
 
-        /* ── CONTACT ── */
-        .contact-grid { display: grid; grid-template-columns: 100px 1fr; }
-        .c-lbl {
-            font-family: 'Courier New', monospace;
-            font-size: 11px;
-            color: var(--amber);
-            padding: 6px 14px 6px 0;
-            border-bottom: 1px solid var(--border);
-            text-transform: uppercase;
-            letter-spacing: .5px;
+        .project h3 {
+            font-size: 13px;
+            font-weight: bold;
+            color: var(--hi);
+            margin-bottom: 2px;
         }
-        .c-val {
-            font-size: 12px;
-            color: var(--text);
-            padding: 6px 0;
-            border-bottom: 1px solid var(--border);
-        }
-        .c-lbl:last-of-type, .c-val:last-of-type { border-bottom: none; }
-        .c-val a { color: var(--teal); text-decoration: none; }
-        .c-val a:hover { color: var(--amber); }
+        .project.feat h3 { color: var(--accent); }
 
-        /* ── FOOTER ── */
-        footer {
-            border-top: 1px solid var(--border);
-            padding-top: 14px;
-            margin-top: 8px;
-            font-family: 'Courier New', monospace;
+        .tags {
             font-size: 10px;
-            color: var(--text-dim);
+            color: var(--dim);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+        .role {
+            font-size: 11px;
+            color: var(--dim);
+            margin-bottom: 8px;
+        }
+        .project p {
+            font-size: 12px;
+            line-height: 1.8;
+            margin-bottom: 8px;
+        }
+        .project p .hi { color: var(--hi); }
+        .stack {
+            font-size: 11px;
+            color: var(--dim);
+            margin-bottom: 4px;
+        }
+        .stack em { color: var(--accent); font-style: normal; }
+        .link { font-size: 11px; }
+        .link a { color: var(--dim); text-decoration: none; }
+        .link a:hover { color: var(--accent); }
+
+        /* certs */
+        .certs { list-style: none; }
+        .certs li {
             display: flex;
-            flex-wrap: wrap;
             justify-content: space-between;
-            gap: 6px;
+            align-items: baseline;
+            padding: 4px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 12px;
         }
-        footer a { color: var(--text-dim); text-decoration: none; }
-        footer a:hover { color: var(--teal); }
+        .certs li:last-child { border-bottom: none; }
+        .certs .c-name { color: var(--fg); }
+        .certs .c-date { color: var(--dim); font-size: 11px; white-space: nowrap; margin-left: 12px; }
 
-        /* ── MISC ── */
-        code { font-family: 'Courier New', monospace; font-size: 11px; color: var(--teal-hi); }
-        ::selection { background: var(--amber-dim); color: var(--text-hi); }
+        /* contact dl overrides */
+        .contact-dl dt { margin-top: 8px; }
+        .contact-dl a { color: var(--fg); text-decoration: none; }
+        .contact-dl a:hover { color: var(--accent); }
+
+        /* footer */
+        footer {
+            margin-top: 48px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+            font-size: 11px;
+            color: var(--dim);
+        }
+
+        /* misc */
+        ::selection { background: var(--accent); color: var(--bg); }
         ::-webkit-scrollbar { width: 6px; background: var(--bg); }
-        ::-webkit-scrollbar-thumb { background: var(--border-hi); }
+        ::-webkit-scrollbar-thumb { background: var(--border); }
 
-        /* ── RESPONSIVE ── */
-        @media (max-width: 580px) {
-            .hdr-name { font-size: 22px; letter-spacing: 3px; }
-            .skills-dl { grid-template-columns: 1fr; }
-            .skills-dl dt { border-bottom: none; padding-bottom: 0; }
-            .contact-grid { grid-template-columns: 86px 1fr; }
-            .nav-a { padding: 8px 10px; font-size: 10px; }
-        }
-        @media (max-width: 420px) {
-            .hdr-name { font-size: 17px; }
+        @media (max-width: 520px) {
+            main { padding: 32px 16px 48px; }
+            .name { font-size: 18px; }
+            .certs li { flex-direction: column; gap: 0; }
+            .certs .c-date { margin-left: 0; }
         }
     </style>
 </head>
 <body>
+<main>
 
-<!-- lofi grain overlay -->
-<div id="grain" aria-hidden="true"></div>
+<header>
+    <div class="name">babak aghayev</div>
+    <div class="handle">@aghayev3</div>
+    <div class="tagline">blue team · soc analyst · dfir · active directory security</div>
+    <div class="location">baku, azerbaijan · azcc technion cohort 7, ranked #1</div>
+    <nav>
+        <a href="#about">about</a><span class="sep">/</span>
+        <a href="#projects">projects</a><span class="sep">/</span>
+        <a href="#skills">skills</a><span class="sep">/</span>
+        <a href="#certs">certs</a><span class="sep">/</span>
+        <a href="#contact">contact</a>
+    </nav>
+</header>
 
-<!-- ╔═ TOP BAR ══════════════════════════════════════════════════════════════╗ -->
-<div id="topbar">
-    <span>◈ AGHAYEV3.GITHUB.IO</span>
-    <span class="sep">·</span>
-    <span>EST. 2026</span>
-    <span class="sep">·</span>
-    <span>BAKU, AZERBAIJAN</span>
-    <span class="sep">·</span>
-    <span class="online">● ONLINE</span>
-    <span class="sep">·</span>
-    <span id="clock"></span>
-</div>
+<hr>
 
-<div id="site">
+<section id="about">
+    <h2>about</h2>
+    <p class="intro">
+        Blue-team cybersecurity professional. I build detection rules, investigate
+        forensic disk images, and automate Active Directory environments.
+        Graduated #1 in my cohort at the Azerbaijan Cybersecurity Center — Technion
+        Blue Team programme, selected as one of ~60 from 2,100+ applicants.
+    </p>
+    <dl>
+        <dt>education</dt>
+        <dd>B.S. Computer Science, <span class="hi">Magna Cum Laude, GPA 3.8</span> — University of Mary Hardin-Baylor, 2024</dd>
 
-<!-- ╔═ HEADER ═══════════════════════════════════════════════════════════════╗ -->
-<div class="panel" id="header-panel">
-    <div class="panel-bar">
-        <span class="pt">aghayev3.github.io — Portfolio v1.0</span>
-        <span class="pc">● ● ●</span>
-    </div>
-    <div class="hdr-body">
-        <div class="hdr-name">BABAK AGHAYEV</div>
-        <div class="hdr-handle">// aghayev3 //</div>
-        <div class="hdr-rule">────────────────────────────────────────</div>
-        <div class="hdr-tags">
-            <span>Blue Team</span><span class="dot">·</span>
-            <span>SOC Analyst</span><span class="dot">·</span>
-            <span>DFIR</span><span class="dot">·</span>
-            <span>Active Directory Security</span>
-        </div>
-        <div class="hdr-meta">
-            <span>Baku, Azerbaijan</span>
-            <span class="msep">|</span>
-            <span>AzCC Technion Cohort 7 &mdash; Ranked <strong>#1</strong></span>
-            <span class="msep">|</span>
-            <span class="online-dot">● Active</span>
-        </div>
-    </div>
-</div>
+        <dt>programme</dt>
+        <dd><span class="hi">Ranked #1 in Cohort 7</span> — Azerbaijan Cybersecurity Center / Technion Blue Team Programme. One of ~60 selected from 2,100+ applicants. Led by Israeli cybersecurity experts.</dd>
 
-<!-- ╔═ NAV ═══════════════════════════════════════════════════════════════════╗ -->
-<div class="panel" id="nav-panel">
-    <div class="nav-inner">
-        <a class="nav-a" href="#about">WHOAMI</a>
-        <a class="nav-a" href="#projects">PROJECTS</a>
-        <a class="nav-a" href="#skills">SKILLS</a>
-        <a class="nav-a" href="#certs">CERTIFICATIONS</a>
-        <a class="nav-a" href="#contact">CONTACT</a>
-    </div>
-</div>
+        <dt>capstone</dt>
+        <dd>Team Lead, Team AURORA — built IDRIS, a self-hosted ITDR platform. <span class="hi">Instructor-commended</span> for technical depth and completeness.</dd>
 
-<!-- ╔═ WHOAMI ════════════════════════════════════════════════════════════════╗ -->
-<div class="panel" id="about">
-    <div class="panel-bar"><span class="pt">[ WHOAMI ]</span><span class="pc">▪ ▪ ▪</span></div>
-    <div class="panel-body">
-        <p class="intro">
-            Hey — I'm <strong>Babak</strong>, a blue team operator and forensics nerd based in
-            Baku, Azerbaijan. I spend my time building detection rules, picking apart
-            forensic disk images, and automating things that shouldn't have to be done by hand.
+        <dt>experience</dt>
+        <dd>IT Specialist @ Shahdag Mountain Resort — 100+ users, 200+ switches, 50-VM Veeam DR, pfSense migration / Student Worker @ UMHB — Python automation, 50% time reduction on data-entry</dd>
+
+        <dt>languages</dt>
+        <dd>Azerbaijani (native) · English (professional) · Russian · German · French · Turkish</dd>
+    </dl>
+</section>
+
+<hr>
+
+<section id="projects">
+    <h2>projects</h2>
+
+    <article class="project feat">
+        <h3>IDRIS — Identity Detection &amp; Response Intelligence System</h3>
+        <div class="tags">capstone · team lead · instructor commended</div>
+        <div class="role">Team AURORA · AzCC Technion Blue Team Cohort 7 · Team Lead &amp; Core Developer</div>
+        <p>
+            Self-hosted ITDR product — the Cohort 7 capstone. As team lead I designed the
+            architecture, coordinated the build, and drove it from threat emulation through
+            auto-remediation. <span class="hi">Earned strong commendation from programme instructors</span>
+            for technical depth and operational completeness.
         </p>
-        <div>
-            <div class="fact">
-                <span class="fact-label">BACKGROUND</span>
-                <span class="fact-val">
-                    B.S. Computer Science, <span class="hi">Magna Cum Laude, GPA 3.8</span> —
-                    University of Mary Hardin-Baylor, 2024
-                </span>
-            </div>
-            <div class="fact">
-                <span class="fact-label">PROGRAMME</span>
-                <span class="fact-val">
-                    <span class="hi">Ranked #1 in Cohort 7</span> — Azerbaijan Cybersecurity Center /
-                    Technion Blue Team Programme. One of ~60 selected from 2,100+ applicants.
-                    Led by Israeli cybersecurity experts.
-                </span>
-            </div>
-            <div class="fact">
-                <span class="fact-label">CAPSTONE</span>
-                <span class="fact-val">
-                    Team Lead, Team AURORA — built IDRIS, a self-hosted ITDR platform.
-                    <span class="hi">Instructor-commended</span> for technical depth and completeness.
-                </span>
-            </div>
-            <div class="fact">
-                <span class="fact-label">PREV. ROLES</span>
-                <span class="fact-val">
-                    IT Specialist @ Shahdag Mountain Resort — 100+ users, 200+ switches,
-                    50-VM Veeam DR, pfSense migration &nbsp;/&nbsp;
-                    Student Worker @ UMHB — Python automation, 50% time reduction on data-entry
-                </span>
-            </div>
-            <div class="fact">
-                <span class="fact-label">LANGUAGES</span>
-                <span class="fact-val">
-                    Azerbaijani (native) &nbsp;·&nbsp; English (professional) &nbsp;·&nbsp;
-                    Russian &nbsp;·&nbsp; German &nbsp;·&nbsp; French &nbsp;·&nbsp; Turkish
-                </span>
-            </div>
-        </div>
-    </div>
-</div>
+        <p>
+            Emulates the full on-prem AD identity kill-chain: Kerberoasting, AS-REP roasting,
+            DCSync, pass-the-hash, Golden/Silver tickets — then validates in real time whether
+            Wazuh detected each technique. Ships a <span class="hi">30-rule Sigma detection library</span>
+            mapped to MITRE ATT&amp;CK, BloodHound-style attack-path visualization, per-identity
+            risk scoring, AI-generated remediation, and a closed detect → fix → re-test loop
+            with guardrailed auto-remediation (approval gate, dry-run, backup/rollback, audit log).
+        </p>
+        <div class="stack"><em>stack:</em> Active Directory · Wazuh · Sigma · MITRE ATT&amp;CK · BloodHound · Python · PowerShell</div>
+        <div class="link">// private team repo — contact for details or demo</div>
+    </article>
 
-<!-- ╔═ PROJECTS ══════════════════════════════════════════════════════════════╗ -->
-<div class="panel" id="projects">
-    <div class="panel-bar"><span class="pt">[ PROJECTS ]</span><span class="pc">▪ ▪ ▪</span></div>
-    <div class="panel-body">
+    <article class="project">
+        <h3>Windows DFIR Investigation — bgoc.corp Enterprise Compromise</h3>
+        <div class="role">AzCC Technion Blue Team Programme · June 2026</div>
+        <p>
+            Full-scope DFIR investigation across two forensic disk images: Windows 10 client
+            and Windows Server 2022 DC. Cross-correlated artifacts to reconstruct a
+            <span class="hi">5-phase attack chain spanning November 2023 – November 2025</span>:
+            WhatsApp ClickFix foothold → DACL/RMM persistence → Mimikatz + BloodHound recon →
+            WinRM lateral movement → exfiltration + 46-second anti-forensic cleanup.
+        </p>
+        <p>
+            Artifacts: Prefetch (CERTUTIL burst: 4 in 12 sec), Shell Bags (UNC paths to \\DC\c$),
+            Chrome history, Registry hives, BAM (wsmprovhost.exe), JumpLists, Edge history,
+            Recycle Bin $R entries. Delivered a <span class="hi">25-page DFIR report</span> with
+            full attack timeline and IOC list.
+        </p>
+        <div class="stack"><em>tools:</em> Autopsy · FTK Imager · Registry Explorer · Eric Zimmerman Tools · MITRE ATT&amp;CK</div>
+        <div class="link"><a href="https://github.com/aghayev3/windows-dfir-investigation" target="_blank" rel="noopener">github.com/aghayev3/windows-dfir-investigation</a></div>
+    </article>
 
-        <!-- IDRIS -->
-        <div class="proj-card feat">
-            <div class="proj-top">
-                <span class="proj-num">01</span>
-                <span class="proj-title">IDRIS — Identity Detection &amp; Response Intelligence System</span>
-                <span class="badge badge-warm">CAPSTONE</span>
-                <span class="badge badge-warm">TEAM LEAD</span>
-                <span class="badge badge-warm">INSTRUCTOR COMMENDED</span>
-            </div>
-            <div class="proj-body">
-                <div class="proj-role">Team AURORA &nbsp;·&nbsp; AzCC Technion Blue Team Cohort 7 &nbsp;·&nbsp; Role: Team Lead &amp; Core Developer</div>
-                <p class="proj-desc">
-                    Self-hosted ITDR (Identity Threat Detection &amp; Response) product — the Cohort 7 capstone.
-                    As team lead I designed the architecture, coordinated the build across the team,
-                    and drove the project from threat emulation through auto-remediation.
-                    <span class="hi">Earned strong commendation from programme instructors</span> for its
-                    technical depth and operational completeness.
-                </p>
-                <p class="proj-desc">
-                    IDRIS emulates the full on-prem Active Directory identity kill-chain:
-                    Kerberoasting, AS-REP roasting, DCSync, pass-the-hash, Golden/Silver tickets —
-                    then validates in real time whether Wazuh detected each technique with evidence.
-                    Ships a <span class="hi">30-rule Sigma detection library</span> mapped to MITRE ATT&amp;CK,
-                    BloodHound-style attack-path visualization, per-identity risk scoring, AI-generated
-                    remediation guidance, and a closed <em>detect &rarr; fix &rarr; re-test</em> loop.
-                    Auto-remediation is fully guardrailed: approval gate, dry-run mode, backup/rollback,
-                    and full audit log.
-                </p>
-                <div class="proj-stack"><span class="lbl">STACK</span> &nbsp;·&nbsp; Active Directory &nbsp;·&nbsp; Wazuh &nbsp;·&nbsp; Sigma &nbsp;·&nbsp; MITRE ATT&amp;CK &nbsp;·&nbsp; BloodHound &nbsp;·&nbsp; Python &nbsp;·&nbsp; PowerShell</div>
-                <div class="proj-link">// private team repo &mdash; contact for details or demo</div>
-            </div>
-        </div>
+    <article class="project">
+        <h3>Active Directory Automation Framework</h3>
+        <div class="role">PowerShell · IaC · Active Directory</div>
+        <p>
+            Two-script PowerShell IaC framework for automated provisioning of enterprise AD
+            environments. Generate-ADConfig.ps1 produces a stateless JSON config (OUs, Groups,
+            Users, GPOs, tiered admin accounts). Deploy-ADEnvironment.ps1 is an idempotent DC
+            deployer with dry-run mode, GPO security baselines, privilege separation via "a-"
+            admin accounts, and PowerShell Transcription audit logging.
+        </p>
+        <div class="stack"><em>stack:</em> PowerShell · Active Directory · GPO · JSON · Windows Server</div>
+        <div class="link"><a href="https://github.com/aghayev3/active-directory-automation" target="_blank" rel="noopener">github.com/aghayev3/active-directory-automation</a></div>
+    </article>
 
-        <!-- Windows DFIR -->
-        <div class="proj-card">
-            <div class="proj-top">
-                <span class="proj-num">02</span>
-                <span class="proj-title">Windows DFIR Investigation &mdash; bgoc.corp Enterprise Compromise</span>
-            </div>
-            <div class="proj-body">
-                <div class="proj-role">AzCC Technion Blue Team Programme &nbsp;·&nbsp; June 2026</div>
-                <p class="proj-desc">
-                    Full-scope DFIR investigation across two forensic disk images: a Windows 10 client (BGOC111)
-                    and a Windows Server 2022 domain controller (BGOC00). Cross-correlated artifacts to
-                    reconstruct a <span class="hi">5-phase attack chain spanning November 2023 &ndash; November 2025</span>:
-                    WhatsApp ClickFix initial foothold &rarr; DACL/RMM persistence &rarr; Mimikatz + BloodHound AD recon
-                    &rarr; WinRM lateral movement &rarr; data exfiltration + 46-second anti-forensic cleanup.
-                    Attacker failed to empty the Recycle Bin — key artifacts recovered.
-                </p>
-                <p class="proj-desc">
-                    Artifacts analyzed: Prefetch (CERTUTIL burst: 4 execs in 12 sec, SCHTASKS, WHOAMI),
-                    Shell Bags (UNC paths to \\DC\c$, \\DC\SYSVOL), Chrome download history,
-                    Registry hives, BAM (wsmprovhost.exe WinRM session), JumpLists, Edge history
-                    (SharpHound download from GitHub), Recycle Bin $R entries.
-                    Delivered a <span class="hi">25-page DFIR report</span> with full attack timeline and IOC list.
-                </p>
-                <div class="proj-stack"><span class="lbl">TOOLS</span> &nbsp;·&nbsp; Autopsy &nbsp;·&nbsp; FTK Imager &nbsp;·&nbsp; Registry Explorer &nbsp;·&nbsp; Eric Zimmerman Tools &nbsp;·&nbsp; MITRE ATT&amp;CK</div>
-                <div class="proj-link">[ <a href="https://github.com/aghayev3/windows-dfir-investigation" target="_blank" rel="noopener">github.com/aghayev3/windows-dfir-investigation</a> ]</div>
-            </div>
-        </div>
+    <article class="project">
+        <h3>Phishing URL Threat-Intelligence Pipeline</h3>
+        <div class="role">Python · OSINT · Threat Intelligence</div>
+        <p>
+            Automated pipeline that aggregates and analyzes malicious URL data from URLhaus,
+            OpenPhish, ThreatFox, and AlienVault OTX. Normalizes diverse feeds into a unified
+            schema, computes threat distribution, temporal trends, brand impersonation, and
+            cross-source overlap. Generates a self-contained HTML report with embedded charts
+            and an optional Streamlit dashboard. Includes demo mode for offline testing.
+        </p>
+        <div class="stack"><em>stack:</em> Python · URLhaus · OpenPhish · ThreatFox · AlienVault OTX · Streamlit · pandas</div>
+        <div class="link"><a href="https://github.com/aghayev3/phishing_project" target="_blank" rel="noopener">github.com/aghayev3/phishing_project</a></div>
+    </article>
 
-        <!-- AD Automation -->
-        <div class="proj-card">
-            <div class="proj-top">
-                <span class="proj-num">03</span>
-                <span class="proj-title">Active Directory Automation Framework</span>
-            </div>
-            <div class="proj-body">
-                <div class="proj-role">PowerShell &nbsp;·&nbsp; IaC &nbsp;·&nbsp; Active Directory</div>
-                <p class="proj-desc">
-                    Two-script PowerShell IaC framework for automated, repeatable provisioning of enterprise
-                    Active Directory environments with security built in from the start.
-                    <code>Generate-ADConfig.ps1</code> produces a stateless JSON config (OUs, Groups, Users,
-                    GPOs, tiered admin accounts). <code>Deploy-ADEnvironment.ps1</code> is an idempotent DC
-                    deployer with dry-run mode, GPO security baselines, privilege separation via "a-" prefixed
-                    admin accounts, and PowerShell Transcription audit logging.
-                </p>
-                <div class="proj-stack"><span class="lbl">STACK</span> &nbsp;·&nbsp; PowerShell &nbsp;·&nbsp; Active Directory &nbsp;·&nbsp; GPO &nbsp;·&nbsp; JSON &nbsp;·&nbsp; Windows Server</div>
-                <div class="proj-link">[ <a href="https://github.com/aghayev3/active-directory-automation" target="_blank" rel="noopener">github.com/aghayev3/active-directory-automation</a> ]</div>
-            </div>
-        </div>
+    <article class="project">
+        <h3>IT Email Router</h3>
+        <div class="role">Python · AI · Microsoft 365 · Docker</div>
+        <p>
+            AI-powered email triage system that classifies incoming IT support emails and
+            routes them to the correct department using Google Gemini AI. Integrates with
+            Microsoft 365 via Graph API. Dockerized, config-driven, includes a full mock
+            test suite and a human-review fallback queue for low-confidence classifications.
+        </p>
+        <div class="stack"><em>stack:</em> Python · Microsoft Graph API · Gemini AI · Docker · M365</div>
+        <div class="link"><a href="https://github.com/aghayev3/mail-router" target="_blank" rel="noopener">github.com/aghayev3/mail-router</a></div>
+    </article>
+</section>
 
-        <!-- Phishing TI Pipeline -->
-        <div class="proj-card">
-            <div class="proj-top">
-                <span class="proj-num">04</span>
-                <span class="proj-title">Phishing URL Threat-Intelligence Pipeline</span>
-            </div>
-            <div class="proj-body">
-                <div class="proj-role">Python &nbsp;·&nbsp; OSINT &nbsp;·&nbsp; Threat Intelligence</div>
-                <p class="proj-desc">
-                    Automated pipeline that aggregates, normalizes, and analyzes malicious URL data from
-                    URLhaus, OpenPhish, ThreatFox, and AlienVault OTX. Parses diverse feed formats into a
-                    unified schema, then computes threat distribution, temporal trends, brand impersonation
-                    patterns, and cross-source IOC overlap. Generates a self-contained portable HTML report
-                    with embedded charts and an optional Streamlit dashboard for interactive filtering.
-                    Includes a demo mode with synthetic data for fully offline testing.
-                </p>
-                <div class="proj-stack"><span class="lbl">STACK</span> &nbsp;·&nbsp; Python &nbsp;·&nbsp; URLhaus &nbsp;·&nbsp; OpenPhish &nbsp;·&nbsp; ThreatFox &nbsp;·&nbsp; AlienVault OTX &nbsp;·&nbsp; Streamlit &nbsp;·&nbsp; pandas</div>
-                <div class="proj-link">[ <a href="https://github.com/aghayev3/phishing_project" target="_blank" rel="noopener">github.com/aghayev3/phishing_project</a> ]</div>
-            </div>
-        </div>
+<hr>
 
-        <!-- IT Email Router -->
-        <div class="proj-card">
-            <div class="proj-top">
-                <span class="proj-num">05</span>
-                <span class="proj-title">IT Email Router</span>
-            </div>
-            <div class="proj-body">
-                <div class="proj-role">Python &nbsp;·&nbsp; AI &nbsp;·&nbsp; Microsoft 365 &nbsp;·&nbsp; Docker</div>
-                <p class="proj-desc">
-                    AI-powered IT email triage system that classifies incoming support emails and routes
-                    them to the correct department (Help Desk, Networking, Cybersecurity, SysAdmin) using
-                    Google Gemini AI. Integrates with Microsoft 365 via Microsoft Graph API for live mailbox
-                    polling. Dockerized for production; config fully driven by environment variables.
-                    Includes a full mock test suite for offline validation and a human-review fallback queue
-                    for low-confidence classifications.
-                </p>
-                <div class="proj-stack"><span class="lbl">STACK</span> &nbsp;·&nbsp; Python &nbsp;·&nbsp; Microsoft Graph API &nbsp;·&nbsp; Gemini AI &nbsp;·&nbsp; Docker &nbsp;·&nbsp; M365</div>
-                <div class="proj-link">[ <a href="https://github.com/aghayev3/mail-router" target="_blank" rel="noopener">github.com/aghayev3/mail-router</a> ]</div>
-            </div>
-        </div>
+<section id="skills">
+    <h2>skills</h2>
+    <dl>
+        <dt>soc / detection</dt>
+        <dd>Wazuh (custom rules, dashboards) · QRadar · Windows Event Log (4624/25, 4672, 4688, 4720/32, 4768/69, 1102, 7045) · Sysmon · Linux syslog · MITRE ATT&amp;CK &amp; D3FEND · IOC triage</dd>
 
-    </div>
-</div>
+        <dt>network analysis</dt>
+        <dd>Wireshark / PCAP · Zeek (conn/dns/http/ssl) · Snort IDS/IPS · beaconing &amp; C2 detection · TCP/IP · VLANs · VPN · DNS/DHCP · RADIUS/NAC</dd>
 
-<!-- ╔═ SKILLS ════════════════════════════════════════════════════════════════╗ -->
-<div class="panel" id="skills">
-    <div class="panel-bar"><span class="pt">[ SKILLS ]</span><span class="pc">▪ ▪ ▪</span></div>
-    <div class="panel-body">
-        <dl class="skills-dl">
-            <dt>SOC / Detection</dt>
-            <dd>Wazuh (custom rules, dashboards, filtering) &nbsp;·&nbsp; QRadar &nbsp;·&nbsp; Windows Event Log (4624/25, 4672, 4688, 4720/32, 4768/69, 1102, 7045) &nbsp;·&nbsp; Sysmon &nbsp;·&nbsp; Linux syslog &nbsp;·&nbsp; MITRE ATT&amp;CK &amp; D3FEND &nbsp;·&nbsp; IOC triage &nbsp;·&nbsp; alert dashboarding</dd>
+        <dt>dfir</dt>
+        <dd>KAPE · Autopsy · FTK Imager · Volatility · LiME · Registry Explorer · Eric Zimmerman Tools · Prefetch · Shell Bags · JumpLists · BAM · PICERL · chain of custody</dd>
 
-            <dt>Network Analysis</dt>
-            <dd>Wireshark / PCAP &nbsp;·&nbsp; Zeek (conn/dns/http/ssl logs) &nbsp;·&nbsp; Snort IDS/IPS &nbsp;·&nbsp; beaconing &amp; C2 detection &nbsp;·&nbsp; TCP/IP &nbsp;·&nbsp; VLANs &nbsp;·&nbsp; VPN &nbsp;·&nbsp; DNS/DHCP &nbsp;·&nbsp; RADIUS/NAC &nbsp;·&nbsp; 200+ switch estate</dd>
+        <dt>ad / identity</dt>
+        <dd>Active Directory hardening · Kerberoasting / AS-REP / DCSync detection · pass-the-hash / Golden &amp; Silver ticket · BloodHound · 30+ Sigma rules authored · GPO baselines · tiered admin model</dd>
 
-            <dt>DFIR</dt>
-            <dd>KAPE &nbsp;·&nbsp; Autopsy &nbsp;·&nbsp; FTK Imager &nbsp;·&nbsp; Volatility &nbsp;·&nbsp; LiME &nbsp;·&nbsp; Registry Explorer &nbsp;·&nbsp; Eric Zimmerman Tools &nbsp;·&nbsp; Prefetch &nbsp;·&nbsp; Shell Bags &nbsp;·&nbsp; JumpLists &nbsp;·&nbsp; BAM &nbsp;·&nbsp; PICERL &nbsp;·&nbsp; chain of custody &nbsp;·&nbsp; report writing</dd>
+        <dt>infrastructure</dt>
+        <dd>Windows Server · Linux (Debian/RHEL) · VMware vSphere · Veeam Backup &amp; DR (50-VM) · pfSense (TMG migration, 80+ rules) · honeynet configuration</dd>
 
-            <dt>AD / Identity</dt>
-            <dd>Active Directory hardening &amp; audit &nbsp;·&nbsp; Kerberoasting / AS-REP roasting / DCSync detection &nbsp;·&nbsp; pass-the-hash / Golden &amp; Silver ticket &nbsp;·&nbsp; BloodHound attack-path analysis &nbsp;·&nbsp; 30+ Sigma rules authored &nbsp;·&nbsp; GPO baselines &nbsp;·&nbsp; tiered admin model</dd>
+        <dt>scripting / dev</dt>
+        <dd>Python · PowerShell · Bash · Java · C/C++ · Git · Docker</dd>
+    </dl>
+</section>
 
-            <dt>Infrastructure</dt>
-            <dd>Windows Server &nbsp;·&nbsp; Linux (Debian/RHEL) &nbsp;·&nbsp; VMware vSphere &nbsp;·&nbsp; Veeam Backup &amp; DR (50-VM estate) &nbsp;·&nbsp; pfSense (Forefront TMG migration, 80+ rules) &nbsp;·&nbsp; honeynet configuration</dd>
+<hr>
 
-            <dt>Scripting / Dev</dt>
-            <dd>Python &nbsp;·&nbsp; PowerShell (IaC, AD automation) &nbsp;·&nbsp; Bash &nbsp;·&nbsp; Java &nbsp;·&nbsp; C/C++ &nbsp;·&nbsp; Git / GitHub &nbsp;·&nbsp; Docker</dd>
-        </dl>
-    </div>
-</div>
+<section id="certs">
+    <h2>certifications</h2>
+    <ul class="certs">
+        <li><span class="c-name">CompTIA Security+</span><span class="c-date">Nov 2025</span></li>
+        <li><span class="c-name">Cisco CCNA</span><span class="c-date">Apr 2023</span></li>
+        <li><span class="c-name">Google Cybersecurity Specialization</span><span class="c-date">2025</span></li>
+        <li><span class="c-name">Google IT Automation with Python</span><span class="c-date">2025</span></li>
+        <li><span class="c-name">Google IT Support Professional</span><span class="c-date">2025</span></li>
+        <li><span class="c-name">Google Prompting Essentials &amp; AI Essentials</span><span class="c-date">2025</span></li>
+        <li><span class="c-name">AzCC Technion Blue Team Programme — Cohort 7, #1</span><span class="c-date">2026</span></li>
+        <li><span class="c-name">B.S. Computer Science — Magna Cum Laude, 3.8 — UMHB</span><span class="c-date">2024</span></li>
+    </ul>
+</section>
 
-<!-- ╔═ CERTIFICATIONS ════════════════════════════════════════════════════════╗ -->
-<div class="panel" id="certs">
-    <div class="panel-bar"><span class="pt">[ CERTIFICATIONS ]</span><span class="pc">▪ ▪ ▪</span></div>
-    <div class="panel-body">
-        <div class="cert-row">
-            <span class="cert-name">CompTIA Security+</span>
-            <span class="cert-date">Nov 2025</span>
-        </div>
-        <div class="cert-row">
-            <span class="cert-name">Cisco CCNA</span>
-            <span class="cert-date">Apr 2023</span>
-        </div>
-        <div class="cert-row">
-            <span class="cert-name">Google Cybersecurity Specialization (Coursera)</span>
-            <span class="cert-date">2025</span>
-        </div>
-        <div class="cert-row">
-            <span class="cert-name">Google IT Automation with Python (Coursera)</span>
-            <span class="cert-date">2025</span>
-        </div>
-        <div class="cert-row">
-            <span class="cert-name">Google IT Support Professional (Coursera)</span>
-            <span class="cert-date">2025</span>
-        </div>
-        <div class="cert-row">
-            <span class="cert-name">Google Prompting Essentials &amp; AI Essentials (Coursera)</span>
-            <span class="cert-date">2025</span>
-        </div>
-        <div class="cert-row">
-            <span class="cert-name">AzCC Technion Blue Team Programme — Cohort 7, Ranked #1</span>
-            <span class="cert-date">Jan 2026 – present</span>
-        </div>
-        <div class="cert-row">
-            <span class="cert-name">B.S. Computer Science — Magna Cum Laude, GPA 3.8 — UMHB</span>
-            <span class="cert-date">2024</span>
-        </div>
-    </div>
-</div>
+<hr>
 
-<!-- ╔═ CONTACT ═══════════════════════════════════════════════════════════════╗ -->
-<div class="panel" id="contact">
-    <div class="panel-bar"><span class="pt">[ CONTACT ]</span><span class="pc">▪ ▪ ▪</span></div>
-    <div class="panel-body">
-        <div class="contact-grid">
-            <span class="c-lbl">Name</span>
-            <span class="c-val">Babak Aghayev</span>
+<section id="contact">
+    <h2>contact</h2>
+    <dl class="contact-dl">
+        <dt>email</dt>
+        <dd><a href="mailto:aghayev0003@gmail.com">aghayev0003@gmail.com</a></dd>
 
-            <span class="c-lbl">Handle</span>
-            <span class="c-val">aghayev3</span>
+        <dt>github</dt>
+        <dd><a href="https://github.com/aghayev3" target="_blank" rel="noopener">github.com/aghayev3</a></dd>
 
-            <span class="c-lbl">Email</span>
-            <span class="c-val"><a href="mailto:aghayev0003@gmail.com">aghayev0003@gmail.com</a></span>
+        <dt>linkedin</dt>
+        <dd><a href="https://linkedin.com/in/babak-aghayev" target="_blank" rel="noopener">linkedin.com/in/babak-aghayev</a></dd>
 
-            <span class="c-lbl">GitHub</span>
-            <span class="c-val"><a href="https://github.com/aghayev3" target="_blank" rel="noopener">github.com/aghayev3</a></span>
+        <dt>location</dt>
+        <dd>Baku, Azerbaijan</dd>
 
-            <span class="c-lbl">LinkedIn</span>
-            <span class="c-val"><a href="https://linkedin.com/in/babak-aghayev" target="_blank" rel="noopener">linkedin.com/in/babak-aghayev</a></span>
+        <dt>phone</dt>
+        <dd>+994 50 554 97 15</dd>
+    </dl>
+</section>
 
-            <span class="c-lbl">Location</span>
-            <span class="c-val">Baku, Azerbaijan</span>
-
-            <span class="c-lbl">Phone</span>
-            <span class="c-val">+994 50 554 97 15</span>
-        </div>
-    </div>
-</div>
-
-<!-- ╔═ FOOTER ════════════════════════════════════════════════════════════════╗ -->
 <footer>
-    <span>© 2026 Babak Aghayev &nbsp;·&nbsp; <a href="https://github.com/aghayev3/aghayev3.github.io">source on GitHub</a></span>
-    <span><a href="#header-panel">↑ back to top</a> &nbsp;·&nbsp; HTML/CSS &nbsp;·&nbsp; no frameworks</span>
+    © 2026 babak aghayev · <a href="https://github.com/aghayev3/aghayev3.github.io" style="color:var(--dim);text-decoration:none;">source</a>
 </footer>
 
-</div><!-- /#site -->
-
-<script>
-    (function () {
-        var el = document.getElementById('clock');
-        function tick() {
-            if (!el) return;
-            var d = new Date();
-            var p = function(n){ return n < 10 ? '0'+n : n; };
-            el.textContent = d.getUTCFullYear() + '-'
-                + p(d.getUTCMonth()+1) + '-'
-                + p(d.getUTCDate()) + ' '
-                + p(d.getUTCHours()) + ':'
-                + p(d.getUTCMinutes()) + ':'
-                + p(d.getUTCSeconds()) + ' UTC';
-        }
-        tick();
-        setInterval(tick, 1000);
-    })();
-</script>
+</main>
 </body>
 </html>
