@@ -9,38 +9,51 @@
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --bg:         #06080f;
-            --bg-panel:   #0a0c1a;
-            --bg-card:    #07091a;
-            --border:     #172040;
-            --border-hi:  #253560;
-            --text:       #b8c4e0;
-            --text-dim:   #4a5878;
-            --text-hi:    #dde6f8;
-            --amber:      #f0b030;
-            --amber-hi:   #ffd166;
-            --amber-dim:  #7a5810;
-            --blue:       #3a9fff;
-            --blue-hi:    #70c0ff;
-            --blue-dim:   #173060;
-            --cyan:       #00ddf0;
-            --green-s:    #33ff99;
+            /* warm espresso / tea-house-at-night palette */
+            --bg:         #0d0a07;   /* dark espresso */
+            --bg-panel:   #131008;   /* dark walnut */
+            --bg-card:    #0f0c07;   /* deeper shadow */
+            --border:     #30200e;   /* sepia border */
+            --border-hi:  #4a3018;   /* warm highlight border */
+            --text:       #c8b48a;   /* candlelight cream */
+            --text-dim:   #6a5238;   /* warm muted brown */
+            --text-hi:    #e8d0a0;   /* bright warm cream */
+            --amber:      #e09428;   /* lantern amber — primary */
+            --amber-hi:   #f0b848;   /* warm gold highlight */
+            --amber-dim:  #5c3a0a;   /* dark amber */
+            --terra:      #b85e38;   /* terracotta — Icheri Sheher stone */
+            --terra-dim:  #6a2e18;   /* dark terracotta */
+            --teal:       #4a8870;   /* Caspian teal — links */
+            --teal-hi:    #62aa8a;   /* bright teal */
+            --teal-dim:   #284e40;   /* dark teal */
+            --sage:       #7a9868;   /* muted sage — status */
         }
 
         html { scroll-behavior: smooth; }
 
         body {
             background-color: var(--bg);
-            background-image: radial-gradient(rgba(58, 159, 255, 0.07) 1px, transparent 1px);
-            background-size: 22px 22px;
+            /* warm amber dot grid — like distant city lights */
+            background-image: radial-gradient(rgba(200, 140, 60, 0.07) 1px, transparent 1px);
+            background-size: 24px 24px;
             color: var(--text);
             font-family: Verdana, Geneva, Tahoma, sans-serif;
             font-size: 13px;
-            line-height: 1.7;
+            line-height: 1.75;
             min-height: 100vh;
         }
 
-        /* subtle scanlines — less intense than before */
+        /* warm vignette — like lamplight fading at the edges */
+        body::before {
+            content: '';
+            position: fixed; top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: radial-gradient(ellipse at 50% 30%, transparent 45%, rgba(10, 6, 2, 0.82) 100%);
+            pointer-events: none;
+            z-index: 9998;
+        }
+
+        /* very subtle warm scanlines */
         body::after {
             content: '';
             position: fixed; top: 0; left: 0;
@@ -48,15 +61,38 @@
             background: repeating-linear-gradient(
                 0deg,
                 transparent 0px, transparent 2px,
-                rgba(0,0,0,0.06) 2px, rgba(0,0,0,0.06) 3px
+                rgba(0, 0, 0, 0.04) 2px, rgba(0, 0, 0, 0.04) 3px
             );
             pointer-events: none;
             z-index: 9999;
         }
 
+        /* lofi film grain — animated noise overlay */
+        #grain {
+            position: fixed; top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+            opacity: 0.032;
+            pointer-events: none;
+            z-index: 9997;
+            animation: grain 9s steps(10) infinite;
+        }
+        @keyframes grain {
+            0%  { transform: translate(0,0); }
+            10% { transform: translate(-4%,-9%); }
+            20% { transform: translate(5%,-14%); }
+            30% { transform: translate(-7%, 6%); }
+            40% { transform: translate(11%, 8%); }
+            50% { transform: translate(-3%, 2%); }
+            60% { transform: translate(8%,-7%); }
+            70% { transform: translate(-5%, 11%); }
+            80% { transform: translate(6%,-4%); }
+            90% { transform: translate(-2%, 8%); }
+        }
+
         /* ── TOP BAR ── */
         #topbar {
-            background: #030408;
+            background: #080603;
             border-bottom: 1px solid var(--border);
             padding: 4px 18px;
             font-family: 'Courier New', monospace;
@@ -67,14 +103,14 @@
             gap: 8px;
             align-items: center;
         }
-        #topbar .online { color: var(--green-s); }
+        #topbar .online { color: var(--sage); }
         #topbar .sep { color: var(--border); }
 
         /* ── MAIN WRAPPER ── */
         #site {
             max-width: 920px;
             margin: 0 auto;
-            padding: 20px 18px 48px;
+            padding: 20px 18px 52px;
         }
 
         /* ── PANEL SYSTEM ── */
@@ -82,42 +118,48 @@
             border: 1px solid var(--border);
             background: var(--bg-panel);
             margin-bottom: 14px;
+            border-radius: 2px;
         }
 
         .panel-bar {
-            background: linear-gradient(90deg, #0e1838 0%, var(--bg-panel) 100%);
+            background: linear-gradient(90deg, #231508 0%, var(--bg-panel) 100%);
             border-bottom: 1px solid var(--border);
-            padding: 5px 10px;
+            padding: 5px 11px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             font-family: 'Courier New', monospace;
             font-size: 11px;
+            border-radius: 2px 2px 0 0;
         }
-        .pt { color: var(--blue); letter-spacing: 1px; }
+        .pt { color: var(--amber); letter-spacing: 1px; }
         .pc { color: var(--border-hi); letter-spacing: 3px; font-size: 9px; }
 
         .panel-body { padding: 16px 18px; }
 
         /* ── HEADER ── */
         #header-panel .hdr-body {
-            padding: 32px 18px 28px;
+            padding: 34px 18px 30px;
             text-align: center;
         }
         .hdr-name {
             font-family: Verdana, sans-serif;
             font-size: 30px;
             font-weight: bold;
-            color: #fff;
+            color: var(--text-hi);
             letter-spacing: 5px;
-            text-shadow: 0 0 24px rgba(58,159,255,.9), 0 0 60px rgba(58,159,255,.3);
+            /* warm amber lantern glow — not cold blue */
+            text-shadow:
+                0 0 20px rgba(220, 148, 40, 0.7),
+                0 0 50px rgba(220, 148, 40, 0.25),
+                0 2px 4px rgba(0,0,0,0.8);
             margin-bottom: 8px;
         }
         .hdr-handle {
             font-family: 'Courier New', monospace;
             font-size: 13px;
             color: var(--amber);
-            text-shadow: 0 0 12px rgba(240,176,48,.6);
+            text-shadow: 0 0 10px rgba(220,148,40,.5);
             letter-spacing: 3px;
             margin-bottom: 14px;
         }
@@ -140,7 +182,7 @@
             color: var(--text-dim);
         }
         .hdr-meta .msep { margin: 0 10px; color: var(--border); }
-        .hdr-meta .online-dot { color: var(--green-s); }
+        .hdr-meta .online-dot { color: var(--sage); }
 
         /* ── NAV ── */
         #nav-panel { margin-bottom: 18px; }
@@ -155,38 +197,28 @@
             font-family: Verdana, sans-serif;
             border-right: 1px solid var(--border);
         }
-        .nav-a:hover { background: #0f1428; color: var(--amber); }
+        .nav-a:hover { background: #1a1108; color: var(--amber); }
 
         /* ── ABOUT ── */
         .intro {
-            font-size: 14px;
+            font-size: 13px;
             color: var(--text-hi);
             margin-bottom: 14px;
-            line-height: 1.8;
+            line-height: 1.85;
         }
-        .intro strong { color: #fff; }
+        .intro strong { color: var(--amber-hi); }
 
-        .fact-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0;
-            margin-bottom: 0;
-        }
-        .fact {
-            display: flex;
-            gap: 0;
-            padding: 5px 0;
-            border-bottom: 1px solid var(--border);
-            width: 100%;
-        }
+        .fact { display: flex; padding: 6px 0; border-bottom: 1px solid var(--border); width: 100%; }
+        .fact:last-child { border-bottom: none; }
         .fact-label {
             font-family: 'Courier New', monospace;
             font-size: 11px;
             color: var(--amber);
             min-width: 130px;
             flex-shrink: 0;
+            padding-top: 1px;
         }
-        .fact-val { font-size: 12px; color: var(--text); }
+        .fact-val { font-size: 12px; color: var(--text); line-height: 1.7; }
         .fact-val .hi { color: var(--text-hi); font-weight: bold; }
 
         /* ── PROJECTS ── */
@@ -194,38 +226,29 @@
             border: 1px solid var(--border);
             background: var(--bg-card);
             margin-bottom: 12px;
+            border-radius: 2px;
         }
         .proj-card:last-child { margin-bottom: 0; }
-        .proj-card.feat { border-color: var(--amber-dim); }
+        .proj-card.feat { border-color: var(--terra-dim); }
 
         .proj-top {
-            background: linear-gradient(90deg, #0b1430 0%, var(--bg-card) 100%);
+            background: linear-gradient(90deg, #1e1005 0%, var(--bg-card) 100%);
             border-bottom: 1px solid var(--border);
             padding: 7px 12px;
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
             align-items: center;
+            border-radius: 2px 2px 0 0;
         }
         .proj-card.feat .proj-top {
-            background: linear-gradient(90deg, #1e1200 0%, var(--bg-card) 100%);
-            border-bottom-color: var(--amber-dim);
+            background: linear-gradient(90deg, #281408 0%, var(--bg-card) 100%);
+            border-bottom-color: var(--terra-dim);
         }
 
-        .proj-num {
-            font-family: 'Courier New', monospace;
-            font-size: 11px;
-            color: var(--text-dim);
-        }
-        .proj-title {
-            font-family: Verdana, sans-serif;
-            font-size: 13px;
-            font-weight: bold;
-            color: var(--amber);
-        }
-        .proj-card.feat .proj-title {
-            text-shadow: 0 0 10px rgba(240,176,48,.35);
-        }
+        .proj-num { font-family: 'Courier New', monospace; font-size: 11px; color: var(--text-dim); }
+        .proj-title { font-family: Verdana, sans-serif; font-size: 13px; font-weight: bold; color: var(--amber); }
+        .proj-card.feat .proj-title { text-shadow: 0 0 10px rgba(220,148,40,.3); }
 
         .badge {
             font-family: 'Courier New', monospace;
@@ -235,29 +258,21 @@
             letter-spacing: .5px;
             white-space: nowrap;
         }
-        .badge-gold { color: var(--amber-dim); }
-        .badge-blue { color: var(--blue-dim); }
+        .badge-warm  { color: var(--terra-dim); }
+        .badge-muted { color: var(--teal-dim); }
 
         .proj-body { padding: 12px 14px; }
-        .proj-role {
-            font-family: 'Courier New', monospace;
-            font-size: 11px;
-            color: var(--text-dim);
-            margin-bottom: 8px;
-        }
-        .proj-desc { font-size: 12px; color: var(--text); margin-bottom: 8px; line-height: 1.75; }
+        .proj-role { font-family: 'Courier New', monospace; font-size: 11px; color: var(--text-dim); margin-bottom: 8px; }
+        .proj-desc { font-size: 12px; color: var(--text); margin-bottom: 8px; line-height: 1.8; }
         .proj-desc .hi { color: var(--text-hi); }
         .proj-stack { font-family: 'Courier New', monospace; font-size: 11px; color: var(--text-dim); margin-bottom: 6px; }
-        .proj-stack .lbl { color: var(--blue); }
+        .proj-stack .lbl { color: var(--teal); }
         .proj-link { font-family: 'Courier New', monospace; font-size: 11px; }
-        .proj-link a { color: var(--blue-dim); text-decoration: none; }
+        .proj-link a { color: var(--teal-dim); text-decoration: none; }
         .proj-link a:hover { color: var(--amber); }
 
         /* ── SKILLS TABLE ── */
-        .skills-dl {
-            display: grid;
-            grid-template-columns: 170px 1fr;
-        }
+        .skills-dl { display: grid; grid-template-columns: 170px 1fr; }
         .skills-dl dt {
             font-family: 'Courier New', monospace;
             font-size: 11px;
@@ -273,7 +288,7 @@
             color: var(--text);
             padding: 7px 0;
             border-bottom: 1px solid var(--border);
-            line-height: 1.6;
+            line-height: 1.65;
         }
         .skills-dl dt:last-of-type,
         .skills-dl dd:last-of-type { border-bottom: none; }
@@ -288,19 +303,10 @@
         }
         .cert-row:last-child { border-bottom: none; }
         .cert-name { font-size: 13px; color: var(--text-hi); flex: 1; }
-        .cert-date {
-            font-family: 'Courier New', monospace;
-            font-size: 11px;
-            color: var(--text-dim);
-            white-space: nowrap;
-        }
+        .cert-date { font-family: 'Courier New', monospace; font-size: 11px; color: var(--text-dim); white-space: nowrap; }
 
         /* ── CONTACT ── */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 100px 1fr;
-            gap: 1px 0;
-        }
+        .contact-grid { display: grid; grid-template-columns: 100px 1fr; }
         .c-lbl {
             font-family: 'Courier New', monospace;
             font-size: 11px;
@@ -317,7 +323,7 @@
             border-bottom: 1px solid var(--border);
         }
         .c-lbl:last-of-type, .c-val:last-of-type { border-bottom: none; }
-        .c-val a { color: var(--blue); text-decoration: none; }
+        .c-val a { color: var(--teal); text-decoration: none; }
         .c-val a:hover { color: var(--amber); }
 
         /* ── FOOTER ── */
@@ -334,15 +340,11 @@
             gap: 6px;
         }
         footer a { color: var(--text-dim); text-decoration: none; }
-        footer a:hover { color: var(--blue); }
+        footer a:hover { color: var(--teal); }
 
         /* ── MISC ── */
-        code {
-            font-family: 'Courier New', monospace;
-            font-size: 11px;
-            color: var(--blue-hi);
-        }
-        ::selection { background: var(--blue-dim); color: var(--text-hi); }
+        code { font-family: 'Courier New', monospace; font-size: 11px; color: var(--teal-hi); }
+        ::selection { background: var(--amber-dim); color: var(--text-hi); }
         ::-webkit-scrollbar { width: 6px; background: var(--bg); }
         ::-webkit-scrollbar-thumb { background: var(--border-hi); }
 
@@ -351,7 +353,7 @@
             .hdr-name { font-size: 22px; letter-spacing: 3px; }
             .skills-dl { grid-template-columns: 1fr; }
             .skills-dl dt { border-bottom: none; padding-bottom: 0; }
-            .contact-grid { grid-template-columns: 90px 1fr; }
+            .contact-grid { grid-template-columns: 86px 1fr; }
             .nav-a { padding: 8px 10px; font-size: 10px; }
         }
         @media (max-width: 420px) {
@@ -361,7 +363,10 @@
 </head>
 <body>
 
-<!-- ╔═══ TOP BAR ═══════════════════════════════════════════════════════════╗ -->
+<!-- lofi grain overlay -->
+<div id="grain" aria-hidden="true"></div>
+
+<!-- ╔═ TOP BAR ══════════════════════════════════════════════════════════════╗ -->
 <div id="topbar">
     <span>◈ AGHAYEV3.GITHUB.IO</span>
     <span class="sep">·</span>
@@ -376,7 +381,7 @@
 
 <div id="site">
 
-<!-- ╔═══ HEADER ════════════════════════════════════════════════════════════╗ -->
+<!-- ╔═ HEADER ═══════════════════════════════════════════════════════════════╗ -->
 <div class="panel" id="header-panel">
     <div class="panel-bar">
         <span class="pt">aghayev3.github.io — Portfolio v1.0</span>
@@ -402,7 +407,7 @@
     </div>
 </div>
 
-<!-- ╔═══ NAV ════════════════════════════════════════════════════════════════╗ -->
+<!-- ╔═ NAV ═══════════════════════════════════════════════════════════════════╗ -->
 <div class="panel" id="nav-panel">
     <div class="nav-inner">
         <a class="nav-a" href="#about">WHOAMI</a>
@@ -413,7 +418,7 @@
     </div>
 </div>
 
-<!-- ╔═══ WHOAMI ═════════════════════════════════════════════════════════════╗ -->
+<!-- ╔═ WHOAMI ════════════════════════════════════════════════════════════════╗ -->
 <div class="panel" id="about">
     <div class="panel-bar"><span class="pt">[ WHOAMI ]</span><span class="pc">▪ ▪ ▪</span></div>
     <div class="panel-body">
@@ -422,7 +427,7 @@
             Baku, Azerbaijan. I spend my time building detection rules, picking apart
             forensic disk images, and automating things that shouldn't have to be done by hand.
         </p>
-        <div class="fact-row">
+        <div>
             <div class="fact">
                 <span class="fact-label">BACKGROUND</span>
                 <span class="fact-val">
@@ -464,7 +469,7 @@
     </div>
 </div>
 
-<!-- ╔═══ PROJECTS ═══════════════════════════════════════════════════════════╗ -->
+<!-- ╔═ PROJECTS ══════════════════════════════════════════════════════════════╗ -->
 <div class="panel" id="projects">
     <div class="panel-bar"><span class="pt">[ PROJECTS ]</span><span class="pc">▪ ▪ ▪</span></div>
     <div class="panel-body">
@@ -474,9 +479,9 @@
             <div class="proj-top">
                 <span class="proj-num">01</span>
                 <span class="proj-title">IDRIS — Identity Detection &amp; Response Intelligence System</span>
-                <span class="badge badge-gold">CAPSTONE</span>
-                <span class="badge badge-gold">TEAM LEAD</span>
-                <span class="badge badge-gold">INSTRUCTOR COMMENDED</span>
+                <span class="badge badge-warm">CAPSTONE</span>
+                <span class="badge badge-warm">TEAM LEAD</span>
+                <span class="badge badge-warm">INSTRUCTOR COMMENDED</span>
             </div>
             <div class="proj-body">
                 <div class="proj-role">Team AURORA &nbsp;·&nbsp; AzCC Technion Blue Team Cohort 7 &nbsp;·&nbsp; Role: Team Lead &amp; Core Developer</div>
@@ -593,10 +598,10 @@
             </div>
         </div>
 
-    </div><!-- /panel-body -->
+    </div>
 </div>
 
-<!-- ╔═══ SKILLS ═════════════════════════════════════════════════════════════╗ -->
+<!-- ╔═ SKILLS ════════════════════════════════════════════════════════════════╗ -->
 <div class="panel" id="skills">
     <div class="panel-bar"><span class="pt">[ SKILLS ]</span><span class="pc">▪ ▪ ▪</span></div>
     <div class="panel-body">
@@ -622,7 +627,7 @@
     </div>
 </div>
 
-<!-- ╔═══ CERTIFICATIONS ═════════════════════════════════════════════════════╗ -->
+<!-- ╔═ CERTIFICATIONS ════════════════════════════════════════════════════════╗ -->
 <div class="panel" id="certs">
     <div class="panel-bar"><span class="pt">[ CERTIFICATIONS ]</span><span class="pc">▪ ▪ ▪</span></div>
     <div class="panel-body">
@@ -661,7 +666,7 @@
     </div>
 </div>
 
-<!-- ╔═══ CONTACT ════════════════════════════════════════════════════════════╗ -->
+<!-- ╔═ CONTACT ═══════════════════════════════════════════════════════════════╗ -->
 <div class="panel" id="contact">
     <div class="panel-bar"><span class="pt">[ CONTACT ]</span><span class="pc">▪ ▪ ▪</span></div>
     <div class="panel-body">
@@ -690,10 +695,10 @@
     </div>
 </div>
 
-<!-- ╔═══ FOOTER ═════════════════════════════════════════════════════════════╗ -->
+<!-- ╔═ FOOTER ════════════════════════════════════════════════════════════════╗ -->
 <footer>
     <span>© 2026 Babak Aghayev &nbsp;·&nbsp; <a href="https://github.com/aghayev3/aghayev3.github.io">source on GitHub</a></span>
-    <span><a href="#header-panel">↑ back to top</a> &nbsp;·&nbsp; built with HTML/CSS &nbsp;·&nbsp; no frameworks</span>
+    <span><a href="#header-panel">↑ back to top</a> &nbsp;·&nbsp; HTML/CSS &nbsp;·&nbsp; no frameworks</span>
 </footer>
 
 </div><!-- /#site -->
@@ -704,13 +709,13 @@
         function tick() {
             if (!el) return;
             var d = new Date();
-            var pad = function(n){ return n < 10 ? '0'+n : n; };
+            var p = function(n){ return n < 10 ? '0'+n : n; };
             el.textContent = d.getUTCFullYear() + '-'
-                + pad(d.getUTCMonth()+1) + '-'
-                + pad(d.getUTCDate()) + ' '
-                + pad(d.getUTCHours()) + ':'
-                + pad(d.getUTCMinutes()) + ':'
-                + pad(d.getUTCSeconds()) + ' UTC';
+                + p(d.getUTCMonth()+1) + '-'
+                + p(d.getUTCDate()) + ' '
+                + p(d.getUTCHours()) + ':'
+                + p(d.getUTCMinutes()) + ':'
+                + p(d.getUTCSeconds()) + ' UTC';
         }
         tick();
         setInterval(tick, 1000);
