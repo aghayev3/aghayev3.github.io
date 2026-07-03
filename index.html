@@ -3,22 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Babak Aghayev — Cybersecurity Professional — Blue Team, SOC, DFIR, Active Directory Security — Baku, Azerbaijan">
-    <title>Babak Aghayev — Cybersecurity</title>
+    <meta name="description" content="Babak Aghayev — Cybersecurity, Blue Team, Baku — Portfolio">
+    <title>Babak Aghayev</title>
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
             --bg:      #0f0f0f;
-            --surface: #171717;
+            --surface: #161616;
             --border:  #222;
             --fg:      #e0e0e0;
-            --fg2:     #888;
+            --fg2:     #999;
             --fg3:     #555;
             --accent:  #5a8af2;
             --accent-subtle: rgba(90, 138, 242, 0.08);
             --accent-border: rgba(90, 138, 242, 0.18);
-            --radius:  8px;
+            --radius:  10px;
+            --mono:    'SF Mono', 'Cascadia Code', Consolas, 'Liberation Mono', monospace;
         }
 
         html { scroll-behavior: smooth; }
@@ -27,19 +28,15 @@
             background: var(--bg);
             color: var(--fg);
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, Roboto, sans-serif;
-            font-size: 14px;
-            line-height: 1.65;
+            font-size: 15px;
+            line-height: 1.7;
             -webkit-font-smoothing: antialiased;
         }
 
-        .mono {
-            font-family: 'SF Mono', 'Cascadia Code', Consolas, 'Liberation Mono', monospace;
-        }
-
         .wrap {
-            max-width: 1100px;
+            max-width: 1120px;
             margin: 0 auto;
-            padding: 0 32px;
+            padding: 0 36px;
         }
 
         /* ── NAV ── */
@@ -56,11 +53,11 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 52px;
+            height: 54px;
         }
         .nav-brand {
-            font-family: 'SF Mono', 'Cascadia Code', Consolas, monospace;
-            font-size: 13px;
+            font-family: var(--mono);
+            font-size: 14px;
             font-weight: 700;
             color: var(--accent);
             text-decoration: none;
@@ -74,41 +71,106 @@
         }
         .nav-links a:hover { color: var(--fg); }
 
-        /* ── HEADER ── */
-        header {
-            padding: 80px 0 64px;
+        /* ── HERO ── */
+        .hero {
+            padding: 100px 0 40px;
+            text-align: center;
         }
-        header h1 {
-            font-size: 40px;
+        .hero h1 {
+            font-size: 48px;
             font-weight: 700;
-            color: var(--fg);
-            letter-spacing: -0.5px;
-            margin-bottom: 6px;
-            line-height: 1.15;
+            letter-spacing: -1px;
+            margin-bottom: 12px;
         }
-        .handle {
-            font-family: 'SF Mono', 'Cascadia Code', Consolas, monospace;
-            font-size: 14px;
+        .hero .tagline {
+            font-size: 18px;
+            color: var(--fg2);
+            max-width: 520px;
+            margin: 0 auto 8px;
+            line-height: 1.6;
+        }
+        .hero .sub {
+            font-family: var(--mono);
+            font-size: 12px;
             color: var(--fg3);
+            letter-spacing: 1px;
+        }
+
+        /* ── ZIGZAG SECTIONS ── */
+        .zig {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 56px;
+            align-items: center;
+            padding: 72px 0;
+            border-top: 1px solid var(--border);
+        }
+        .zig.reverse .zig-text { order: 2; }
+        .zig.reverse .zig-img  { order: 1; }
+
+        .zig-text h2 {
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--accent);
             margin-bottom: 16px;
         }
-        .headline {
-            font-size: 17px;
+        .zig-text h3 {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--fg);
+            margin-bottom: 16px;
+            line-height: 1.3;
+        }
+        .zig-text p {
             color: var(--fg2);
-            max-width: 600px;
-            line-height: 1.6;
-            margin-bottom: 8px;
+            margin-bottom: 14px;
+            line-height: 1.8;
         }
-        .location {
-            font-size: 13px;
+        .zig-text p strong { color: var(--fg); font-weight: 600; }
+
+        /* placeholder images */
+        .zig-img .placeholder {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            border-radius: var(--radius);
+            border: 2px dashed var(--border);
+            background: var(--surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 8px;
+            overflow: hidden;
+        }
+        .zig-img .placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: var(--radius);
+        }
+        .placeholder-label {
+            font-family: var(--mono);
+            font-size: 11px;
             color: var(--fg3);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
         }
-        .location strong { color: var(--fg2); font-weight: 600; }
+        .placeholder-hint {
+            font-size: 12px;
+            color: var(--fg3);
+            opacity: 0.6;
+        }
 
-        /* ── SECTIONS ── */
-        section { padding: 56px 0; }
+        /* ── DIVIDER ── */
+        .divider {
+            border: none;
+            border-top: 1px solid var(--border);
+        }
 
-        h2 {
+        /* ── SECTION HEADERS ── */
+        .section-head {
             display: flex;
             align-items: center;
             gap: 16px;
@@ -117,103 +179,52 @@
             color: var(--fg3);
             text-transform: uppercase;
             letter-spacing: 3px;
-            margin-bottom: 32px;
+            margin-bottom: 36px;
         }
-        h2::after {
+        .section-head::after {
             content: '';
             flex: 1;
             height: 1px;
             background: var(--border);
         }
 
-        /* ── ABOUT ── */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 3fr 2fr;
-            gap: 56px;
-        }
-        .about-intro {
-            font-size: 15px;
-            color: var(--fg);
-            line-height: 1.8;
-        }
-        .about-intro strong { color: #fff; }
-
-        .fact {
-            padding: 12px 0;
-            border-bottom: 1px solid var(--border);
-        }
-        .fact:last-child { border-bottom: none; }
-        .fact-label {
-            display: block;
-            font-family: 'SF Mono', 'Cascadia Code', Consolas, monospace;
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: var(--fg3);
-            margin-bottom: 4px;
-        }
-        .fact-val {
-            font-size: 13px;
-            color: var(--fg2);
-            line-height: 1.55;
-        }
-        .fact-val strong { color: var(--fg); font-weight: 600; }
-
         /* ── PROJECTS ── */
+        .projects { padding: 72px 0; }
+
         .feat-card {
-            display: grid;
-            grid-template-columns: 1fr 260px;
-            gap: 36px;
             background: var(--accent-subtle);
             border: 1px solid var(--accent-border);
             border-radius: var(--radius);
-            padding: 28px;
-            margin-bottom: 16px;
+            padding: 32px;
+            margin-bottom: 20px;
         }
         .feat-card h3 {
-            font-size: 17px;
+            font-size: 18px;
             font-weight: 700;
-            color: var(--fg);
             margin-bottom: 6px;
         }
         .feat-tags {
-            font-family: 'SF Mono', 'Cascadia Code', Consolas, monospace;
+            font-family: var(--mono);
             font-size: 10px;
             color: var(--accent);
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            margin-bottom: 14px;
+            margin-bottom: 16px;
         }
         .feat-card p {
-            font-size: 13px;
+            font-size: 14px;
             color: var(--fg2);
+            line-height: 1.75;
             margin-bottom: 10px;
-            line-height: 1.7;
         }
         .feat-card p strong { color: var(--fg); font-weight: 600; }
-
-        .feat-meta {
-            border-left: 1px solid var(--border);
-            padding-left: 24px;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-        .meta-item .meta-label {
-            display: block;
-            font-family: 'SF Mono', 'Cascadia Code', Consolas, monospace;
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
+        .feat-stack {
+            font-family: var(--mono);
+            font-size: 11px;
             color: var(--fg3);
-            margin-bottom: 4px;
+            margin-top: 14px;
         }
-        .meta-item span:not(.meta-label) {
-            font-size: 12px;
-            color: var(--fg2);
-            line-height: 1.5;
-        }
+        .feat-stack em { color: var(--accent); font-style: normal; }
 
         .projects-grid {
             display: grid;
@@ -231,11 +242,10 @@
         .proj-card h3 {
             font-size: 15px;
             font-weight: 600;
-            color: var(--fg);
             margin-bottom: 4px;
         }
-        .proj-card .proj-role {
-            font-family: 'SF Mono', 'Cascadia Code', Consolas, monospace;
+        .proj-card .proj-sub {
+            font-family: var(--mono);
             font-size: 11px;
             color: var(--fg3);
             margin-bottom: 12px;
@@ -249,92 +259,71 @@
         }
         .proj-card p strong { color: var(--fg); font-weight: 600; }
         .proj-card .stack {
-            font-family: 'SF Mono', 'Cascadia Code', Consolas, monospace;
+            font-family: var(--mono);
             font-size: 11px;
             color: var(--fg3);
             margin-bottom: 8px;
         }
         .proj-card .stack em { color: var(--accent); font-style: normal; }
         .proj-card .proj-link a {
-            font-family: 'SF Mono', 'Cascadia Code', Consolas, monospace;
+            font-family: var(--mono);
             font-size: 11px;
             color: var(--fg3);
             text-decoration: none;
         }
         .proj-card .proj-link a:hover { color: var(--accent); }
 
-        /* ── SKILLS ── */
-        .skills-grid {
+        /* ── BOTTOM (skills, certs, contact) ── */
+        .bottom { padding: 72px 0; }
+
+        .bottom-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 48px;
         }
-        .skill-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 20px;
-        }
-        .skill-card h4 {
-            font-family: 'SF Mono', 'Cascadia Code', Consolas, monospace;
+
+        .bottom-col h3 {
+            font-family: var(--mono);
             font-size: 10px;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             color: var(--accent);
-            margin-bottom: 12px;
+            margin-bottom: 16px;
         }
-        .skill-card p {
-            font-size: 12px;
+
+        .bottom-col ul {
+            list-style: none;
+        }
+        .bottom-col li {
+            font-size: 13px;
             color: var(--fg2);
-            line-height: 1.65;
+            padding: 5px 0;
+            border-bottom: 1px solid var(--border);
+            line-height: 1.5;
         }
+        .bottom-col li:last-child { border-bottom: none; }
 
-        /* ── BOTTOM GRID (certs + contact) ── */
-        .bottom-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 64px;
-            padding: 56px 0;
-        }
-        .bottom-grid h2 { margin-bottom: 24px; }
-
-        .cert-list { list-style: none; }
-        .cert-list li {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            gap: 12px;
+        .contact-row {
             padding: 8px 0;
             border-bottom: 1px solid var(--border);
-            font-size: 13px;
         }
-        .cert-list li:last-child { border-bottom: none; }
-        .cert-list .c-name { color: var(--fg2); }
-        .cert-list .c-date {
-            font-family: 'SF Mono', 'Cascadia Code', Consolas, monospace;
-            font-size: 11px;
-            color: var(--fg3);
-            white-space: nowrap;
-        }
-
-        .contact-item {
-            padding: 10px 0;
-            border-bottom: 1px solid var(--border);
-        }
-        .contact-item:last-child { border-bottom: none; }
-        .contact-label {
+        .contact-row:last-child { border-bottom: none; }
+        .contact-row .label {
             display: block;
-            font-family: 'SF Mono', 'Cascadia Code', Consolas, monospace;
+            font-family: var(--mono);
             font-size: 10px;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             color: var(--fg3);
-            margin-bottom: 3px;
+            margin-bottom: 2px;
         }
-        .contact-val { font-size: 13px; color: var(--fg2); }
-        .contact-val a { color: var(--fg2); text-decoration: none; }
-        .contact-val a:hover { color: var(--accent); }
+        .contact-row .val {
+            font-size: 13px;
+            color: var(--fg2);
+        }
+        .contact-row a { color: var(--fg2); text-decoration: none; }
+        .contact-row a:hover { color: var(--accent); }
 
         /* ── FOOTER ── */
         footer {
@@ -355,19 +344,20 @@
 
         /* ── RESPONSIVE ── */
         @media (max-width: 860px) {
-            .about-grid { grid-template-columns: 1fr; gap: 32px; }
-            .feat-card { grid-template-columns: 1fr; }
-            .feat-meta { border-left: none; padding-left: 0; border-top: 1px solid var(--border); padding-top: 20px; }
+            .hero h1 { font-size: 36px; }
+            .zig {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+            .zig.reverse .zig-text { order: 1; }
+            .zig.reverse .zig-img  { order: 2; }
             .projects-grid { grid-template-columns: 1fr; }
-            .skills-grid { grid-template-columns: 1fr 1fr; }
-            .bottom-grid { grid-template-columns: 1fr; gap: 40px; }
-            header h1 { font-size: 32px; }
+            .bottom-grid { grid-template-columns: 1fr; gap: 36px; }
         }
         @media (max-width: 520px) {
             .wrap { padding: 0 18px; }
-            header { padding: 48px 0 40px; }
-            header h1 { font-size: 26px; }
-            .skills-grid { grid-template-columns: 1fr; }
+            .hero { padding: 64px 0 32px; }
+            .hero h1 { font-size: 28px; }
             .nav-links { gap: 16px; }
             .nav-links a { font-size: 12px; }
             footer { flex-direction: column; gap: 4px; }
@@ -385,7 +375,6 @@
                 <a href="#about">About</a>
                 <a href="#projects">Projects</a>
                 <a href="#skills">Skills</a>
-                <a href="#certs">Certs</a>
                 <a href="#contact">Contact</a>
             </div>
         </div>
@@ -394,213 +383,262 @@
 
 <div class="wrap">
 
-<!-- HEADER -->
-<header>
+<!-- HERO -->
+<div class="hero">
     <h1>Babak Aghayev</h1>
-    <div class="handle">@aghayev3</div>
-    <p class="headline">Cybersecurity professional specializing in blue team operations, SOC monitoring, digital forensics, and Active Directory security.</p>
-    <p class="location">Baku, Azerbaijan · AzCC Technion Cohort 7, Ranked <strong>#1</strong></p>
-</header>
+    <p class="tagline">Cybersecurity guy from Baku who likes building things that catch bad guys.</p>
+    <p class="sub">Blue Team / SOC / DFIR / Active Directory</p>
+</div>
 
-<!-- ABOUT -->
-<section id="about">
-    <h2>About</h2>
-    <div class="about-grid">
-        <div class="about-intro">
-            <p>I build detection rules, investigate forensic disk images, and automate Active Directory environments. Graduated <strong>#1 in Cohort 7</strong> of the Azerbaijan Cybersecurity Center — Technion Blue Team programme, selected as one of ~60 from 2,100+ applicants. Programme led by Israeli cybersecurity experts.</p>
-            <br>
-            <p>As team lead for <strong>Team AURORA</strong>, I built IDRIS — a self-hosted identity threat detection &amp; response platform that earned strong commendation from programme instructors for its technical depth and completeness.</p>
-        </div>
-        <div>
-            <div class="fact">
-                <span class="fact-label">Education</span>
-                <span class="fact-val"><strong>B.S. Computer Science, Magna Cum Laude, GPA 3.8</strong> — University of Mary Hardin-Baylor, 2024</span>
-            </div>
-            <div class="fact">
-                <span class="fact-label">Experience</span>
-                <span class="fact-val">IT Specialist @ Shahdag Mountain Resort — 100+ users, 200+ switches, 50-VM Veeam DR, pfSense migration</span>
-            </div>
-            <div class="fact">
-                <span class="fact-label">Previous</span>
-                <span class="fact-val">Student Worker @ UMHB — Python automation, 50% time reduction on data-entry workflows</span>
-            </div>
-            <div class="fact">
-                <span class="fact-label">Languages</span>
-                <span class="fact-val">Azerbaijani (native) · English (professional) · Russian · German · French · Turkish</span>
-            </div>
+<!-- ═══════════════════════════════════════════ -->
+<!-- ZIGZAG: ABOUT ME -->
+<!-- ═══════════════════════════════════════════ -->
+
+<!-- 1. INTRO — text left, image right -->
+<div class="zig" id="about">
+    <div class="zig-text">
+        <h2>About Me</h2>
+        <h3>I break labs, not laws.</h3>
+        <p>
+            I'm Babak — born and raised in <strong>Baku, Azerbaijan</strong>. I studied Computer Science
+            in Texas, graduated <strong>Magna Cum Laude</strong>, and came back home to do what I actually
+            care about: defending networks and hunting threats.
+        </p>
+        <p>
+            I got into cybersecurity through the <strong>AzCC Technion Blue Team programme</strong> —
+            a competitive programme led by Israeli cybersecurity experts where I was selected as one of
+            ~60 out of 2,100+ applicants. Graduated <strong>ranked #1</strong> in my cohort.
+        </p>
+        <p>
+            When I'm not staring at SIEM dashboards, I'm probably drinking tea somewhere, reading about
+            geopolitics, or tinkering with a home lab that's held together by willpower and YAML files.
+        </p>
+    </div>
+    <div class="zig-img">
+        <div class="placeholder">
+            <!-- Replace with: <img src="img/notepad.png" alt="Babak writing notes"> -->
+            <span class="placeholder-label">notepad.png</span>
+            <span class="placeholder-hint">lofi — writing on notepad, laptop in background</span>
         </div>
     </div>
-</section>
+</div>
 
+<!-- 2. BAKU — image left, text right -->
+<div class="zig reverse">
+    <div class="zig-text">
+        <h2>Where I'm From</h2>
+        <h3>Baku — where the Caspian meets the chaos.</h3>
+        <p>
+            Baku is one of those cities that doesn't fit into a single aesthetic. You've got thousand-year-old
+            stone walls in <strong>Icherisheher</strong>, Soviet-era apartment blocks, and then the
+            <strong>Flame Towers</strong> glowing over everything at night. It's a weird, beautiful mix.
+        </p>
+        <p>
+            Growing up here shaped how I think — you learn to navigate systems that don't always make sense,
+            which turns out to be surprisingly useful in cybersecurity. The city's energy, the tea culture,
+            the wind off the Caspian — it's home.
+        </p>
+    </div>
+    <div class="zig-img">
+        <div class="placeholder">
+            <!-- Replace with: <img src="img/flame-towers.png" alt="Flame Towers, Baku"> -->
+            <span class="placeholder-label">flame-towers.png</span>
+            <span class="placeholder-hint">lofi — Flame Towers at night / dusk</span>
+        </div>
+    </div>
+</div>
+
+<!-- 3. WHAT I DO — text left, image right -->
+<div class="zig">
+    <div class="zig-text">
+        <h2>What I Do</h2>
+        <h3>Blue team work, quiet mornings, loud alerts.</h3>
+        <p>
+            My day-to-day is <strong>SOC monitoring, detection engineering, and incident response</strong>.
+            I write Sigma rules, dig through forensic images, automate Active Directory environments, and
+            build tools that make defenders' lives easier.
+        </p>
+        <p>
+            As team lead for <strong>Team AURORA</strong>, I built <strong>IDRIS</strong> — a self-hosted
+            identity threat detection & response platform that covers the full AD kill-chain: Kerberoasting,
+            DCSync, Golden Tickets, the works. It earned commendation from programme instructors for its
+            depth and completeness.
+        </p>
+        <p>
+            I believe good security work looks a lot like good engineering — methodical, documented, and
+            boring enough that nothing exciting ever happens on your watch.
+        </p>
+    </div>
+    <div class="zig-img">
+        <div class="placeholder">
+            <!-- Replace with: <img src="img/tea-park.png" alt="Tea in a park"> -->
+            <span class="placeholder-label">tea-park.png</span>
+            <span class="placeholder-hint">lofi — tea glass on a bench, park setting</span>
+        </div>
+    </div>
+</div>
+
+<!-- 4. LIFE — image left, text right -->
+<div class="zig reverse">
+    <div class="zig-text">
+        <h2>Life Outside the Terminal</h2>
+        <h3>Tea, books, and long walks on the boulevard.</h3>
+        <p>
+            I'm a big tea person — Azerbaijani chai, specifically. Armudu glass, two sugar cubes, lemon
+            optional. I'll take it in a park, a chaykhana, or just at my desk while log files scroll by.
+        </p>
+        <p>
+            I read a lot — mostly history, geopolitics, and the occasional dry technical RFC that puts me
+            to sleep faster than melatonin. I speak <strong>six languages</strong> at varying levels of
+            embarrassment: Azerbaijani, English, Russian, German, French, and Turkish.
+        </p>
+        <p>
+            I like the Baku Boulevard at sunset, overengineered home labs, and the satisfying feeling of
+            a detection rule that actually fires when it's supposed to.
+        </p>
+    </div>
+    <div class="zig-img">
+        <div class="placeholder">
+            <!-- Replace with: <img src="img/baku-skyline.png" alt="Baku skyline"> -->
+            <span class="placeholder-label">baku-skyline.png</span>
+            <span class="placeholder-hint">lofi — Port Baku / seaside boulevard skyline</span>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
 <!-- PROJECTS -->
-<section id="projects">
-    <h2>Projects</h2>
+<!-- ═══════════════════════════════════════════ -->
+
+<section class="projects" id="projects">
+    <div class="section-head">Projects</div>
 
     <!-- Featured: IDRIS -->
     <div class="feat-card">
-        <div>
-            <h3>IDRIS — Identity Detection &amp; Response Intelligence System</h3>
-            <div class="feat-tags">Capstone · Team Lead · Instructor Commended</div>
-            <p>
-                Self-hosted ITDR product — the Cohort 7 capstone. As team lead I designed the architecture,
-                coordinated the build across the team, and drove the project from threat emulation through
-                auto-remediation. <strong>Earned strong commendation from programme instructors</strong> for
-                technical depth and operational completeness.
-            </p>
-            <p>
-                Emulates the full on-prem AD identity kill-chain: Kerberoasting, AS-REP roasting, DCSync,
-                pass-the-hash, Golden/Silver tickets — then validates in real time whether Wazuh detected each
-                technique. Ships a <strong>30-rule Sigma detection library</strong> mapped to MITRE ATT&amp;CK,
-                BloodHound-style attack-path visualization, per-identity risk scoring, AI-generated remediation,
-                and a closed detect → fix → re-test loop with guardrailed auto-remediation.
-            </p>
-        </div>
-        <aside class="feat-meta">
-            <div class="meta-item">
-                <span class="meta-label">Role</span>
-                <span>Team Lead &amp; Core Developer</span>
-            </div>
-            <div class="meta-item">
-                <span class="meta-label">Team</span>
-                <span>AURORA · AzCC Technion Cohort 7</span>
-            </div>
-            <div class="meta-item">
-                <span class="meta-label">Stack</span>
-                <span>Active Directory · Wazuh · Sigma · MITRE ATT&amp;CK · BloodHound · Python · PowerShell</span>
-            </div>
-            <div class="meta-item">
-                <span class="meta-label">Repo</span>
-                <span>Private — contact for details or demo</span>
-            </div>
-        </aside>
+        <h3>IDRIS — Identity Detection & Response Intelligence System</h3>
+        <div class="feat-tags">Capstone / Team Lead / Instructor Commended</div>
+        <p>
+            The big one. Self-hosted ITDR platform built as the Cohort 7 capstone. As team lead,
+            I designed the architecture and coordinated the build from threat emulation through
+            auto-remediation. Covers the full on-prem AD identity kill-chain: Kerberoasting, AS-REP
+            roasting, DCSync, pass-the-hash, Golden/Silver tickets — validated in real time against Wazuh.
+        </p>
+        <p>
+            Ships a <strong>30-rule Sigma detection library</strong> mapped to MITRE ATT&CK,
+            BloodHound-style attack-path visualization, per-identity risk scoring, AI-generated
+            remediation, and a closed detect-fix-retest loop.
+        </p>
+        <div class="feat-stack"><em>stack:</em> Active Directory, Wazuh, Sigma, MITRE ATT&CK, BloodHound, Python, PowerShell</div>
     </div>
 
-    <!-- Grid: other projects -->
+    <!-- Grid -->
     <div class="projects-grid">
         <div class="proj-card">
             <h3>Windows DFIR Investigation</h3>
-            <div class="proj-role">bgoc.corp Enterprise Compromise · AzCC Technion · 2026</div>
+            <div class="proj-sub">Enterprise Compromise Analysis / AzCC Technion / 2026</div>
             <p>
-                Full-scope DFIR investigation across two forensic disk images (Windows 10 client + Server 2022 DC).
-                Reconstructed a <strong>5-phase attack chain spanning Nov 2023 – Nov 2025</strong>: WhatsApp ClickFix
-                foothold → DACL/RMM persistence → Mimikatz + BloodHound recon → WinRM lateral movement →
-                exfiltration + 46-second cleanup. Delivered a <strong>25-page report</strong> with full timeline and IOC list.
+                Full-scope forensic investigation across two disk images (Win10 + Server 2022 DC).
+                Reconstructed a <strong>5-phase attack chain</strong>: WhatsApp ClickFix foothold,
+                DACL persistence, Mimikatz recon, WinRM lateral movement, and a 46-second cleanup.
+                Delivered a 25-page report with timeline and IOC list.
             </p>
-            <div class="stack"><em>tools:</em> Autopsy · FTK Imager · Registry Explorer · Eric Zimmerman Tools · MITRE ATT&amp;CK</div>
-            <div class="proj-link"><a href="https://github.com/aghayev3/windows-dfir-investigation" target="_blank" rel="noopener">github.com/aghayev3/windows-dfir-investigation →</a></div>
+            <div class="stack"><em>tools:</em> Autopsy, FTK Imager, Registry Explorer, Eric Zimmerman Tools</div>
+            <div class="proj-link"><a href="https://github.com/aghayev3/windows-dfir-investigation" target="_blank" rel="noopener">github.com/aghayev3/windows-dfir-investigation</a></div>
         </div>
 
         <div class="proj-card">
             <h3>AD Automation Framework</h3>
-            <div class="proj-role">PowerShell · Infrastructure as Code</div>
+            <div class="proj-sub">PowerShell / Infrastructure as Code</div>
             <p>
-                Two-script PowerShell IaC framework for automated provisioning of enterprise Active Directory environments.
-                Generates stateless JSON configs (OUs, Groups, Users, GPOs, tiered admin accounts) and deploys them
-                idempotently with dry-run mode, GPO security baselines, privilege separation, and PowerShell Transcription
-                audit logging.
+                Two-script PowerShell IaC framework for automated AD provisioning. Generates stateless
+                JSON configs and deploys them idempotently with dry-run mode, GPO baselines, privilege
+                separation, and audit logging.
             </p>
-            <div class="stack"><em>stack:</em> PowerShell · Active Directory · GPO · JSON · Windows Server</div>
-            <div class="proj-link"><a href="https://github.com/aghayev3/active-directory-automation" target="_blank" rel="noopener">github.com/aghayev3/active-directory-automation →</a></div>
+            <div class="stack"><em>stack:</em> PowerShell, Active Directory, GPO, JSON, Windows Server</div>
+            <div class="proj-link"><a href="https://github.com/aghayev3/active-directory-automation" target="_blank" rel="noopener">github.com/aghayev3/active-directory-automation</a></div>
         </div>
 
         <div class="proj-card">
             <h3>Phishing URL TI Pipeline</h3>
-            <div class="proj-role">Python · OSINT · Threat Intelligence</div>
+            <div class="proj-sub">Python / OSINT / Threat Intelligence</div>
             <p>
-                Automated pipeline that aggregates and analyzes malicious URL data from URLhaus, OpenPhish, ThreatFox,
-                and AlienVault OTX. Normalizes feeds into a unified schema, computes threat distribution and brand
-                impersonation patterns. Generates self-contained HTML reports with embedded charts and an optional
-                Streamlit dashboard.
+                Automated pipeline aggregating malicious URL data from URLhaus, OpenPhish, ThreatFox,
+                and AlienVault OTX. Normalizes feeds, computes threat distribution and brand impersonation
+                patterns. Generates HTML reports with charts and a Streamlit dashboard.
             </p>
-            <div class="stack"><em>stack:</em> Python · URLhaus · OpenPhish · ThreatFox · OTX · Streamlit · pandas</div>
-            <div class="proj-link"><a href="https://github.com/aghayev3/phishing_project" target="_blank" rel="noopener">github.com/aghayev3/phishing_project →</a></div>
+            <div class="stack"><em>stack:</em> Python, URLhaus, OpenPhish, ThreatFox, OTX, Streamlit</div>
+            <div class="proj-link"><a href="https://github.com/aghayev3/phishing_project" target="_blank" rel="noopener">github.com/aghayev3/phishing_project</a></div>
         </div>
 
         <div class="proj-card">
             <h3>IT Email Router</h3>
-            <div class="proj-role">Python · AI · Microsoft 365 · Docker</div>
+            <div class="proj-sub">Python / AI / Microsoft 365 / Docker</div>
             <p>
-                AI-powered email triage system that classifies incoming IT support emails and routes them to the correct
-                department using Google Gemini AI. Integrates with Microsoft 365 via Graph API. Dockerized for production,
-                config-driven, with a full mock test suite and human-review fallback queue for low-confidence
-                classifications.
+                AI-powered email triage that classifies incoming IT support emails and routes them using
+                Gemini AI. Integrates with M365 via Graph API. Dockerized, config-driven, with a full
+                mock test suite and human-review fallback queue.
             </p>
-            <div class="stack"><em>stack:</em> Python · Microsoft Graph API · Gemini AI · Docker · M365</div>
-            <div class="proj-link"><a href="https://github.com/aghayev3/mail-router" target="_blank" rel="noopener">github.com/aghayev3/mail-router →</a></div>
+            <div class="stack"><em>stack:</em> Python, Microsoft Graph API, Gemini AI, Docker</div>
+            <div class="proj-link"><a href="https://github.com/aghayev3/mail-router" target="_blank" rel="noopener">github.com/aghayev3/mail-router</a></div>
         </div>
     </div>
 </section>
 
-<!-- SKILLS -->
-<section id="skills">
-    <h2>Skills</h2>
-    <div class="skills-grid">
-        <div class="skill-card">
-            <h4>SOC / Detection</h4>
-            <p>Wazuh (custom rules, dashboards) · QRadar · Windows Event Log (4624/25, 4672, 4688, 4720/32, 4768/69, 1102, 7045) · Sysmon · Linux syslog · MITRE ATT&amp;CK &amp; D3FEND · IOC triage</p>
+<!-- ═══════════════════════════════════════════ -->
+<!-- BOTTOM: Skills + Certs + Contact -->
+<!-- ═══════════════════════════════════════════ -->
+
+<section class="bottom" id="skills">
+    <div class="section-head">Skills, Certs & Contact</div>
+    <div class="bottom-grid">
+        <div class="bottom-col">
+            <h3>Skills</h3>
+            <ul>
+                <li>Wazuh, QRadar, Windows Event Logs, Sysmon</li>
+                <li>Sigma rule authoring, MITRE ATT&CK mapping</li>
+                <li>Wireshark, Zeek, Snort IDS/IPS</li>
+                <li>KAPE, Autopsy, FTK, Volatility, Registry Explorer</li>
+                <li>Active Directory hardening & attack detection</li>
+                <li>Windows Server, Linux, VMware, Veeam DR</li>
+                <li>Python, PowerShell, Bash, Docker, Git</li>
+            </ul>
         </div>
-        <div class="skill-card">
-            <h4>Network Analysis</h4>
-            <p>Wireshark / PCAP · Zeek (conn/dns/http/ssl) · Snort IDS/IPS · Beaconing &amp; C2 detection · TCP/IP · VLANs · VPN · DNS/DHCP · RADIUS/NAC</p>
+        <div class="bottom-col">
+            <h3>Certifications</h3>
+            <ul>
+                <li>CompTIA Security+ (Nov 2025)</li>
+                <li>Cisco CCNA (Apr 2023)</li>
+                <li>Google Cybersecurity Specialization</li>
+                <li>Google IT Automation with Python</li>
+                <li>AzCC Technion Blue Team — Cohort 7, #1</li>
+                <li>B.S. Computer Science — Magna Cum Laude, 3.8</li>
+            </ul>
         </div>
-        <div class="skill-card">
-            <h4>DFIR</h4>
-            <p>KAPE · Autopsy · FTK Imager · Volatility · LiME · Registry Explorer · Eric Zimmerman Tools · Prefetch · Shell Bags · JumpLists · BAM · PICERL · chain of custody</p>
-        </div>
-        <div class="skill-card">
-            <h4>AD / Identity</h4>
-            <p>Active Directory hardening · Kerberoasting / AS-REP / DCSync detection · Pass-the-hash / Golden &amp; Silver ticket · BloodHound · 30+ Sigma rules authored · GPO baselines · tiered admin</p>
-        </div>
-        <div class="skill-card">
-            <h4>Infrastructure</h4>
-            <p>Windows Server · Linux (Debian/RHEL) · VMware vSphere · Veeam Backup &amp; DR (50-VM) · pfSense (TMG migration, 80+ rules) · Honeynet configuration</p>
-        </div>
-        <div class="skill-card">
-            <h4>Scripting / Dev</h4>
-            <p>Python · PowerShell (IaC, AD automation) · Bash · Java · C/C++ · Git / GitHub · Docker</p>
+        <div class="bottom-col" id="contact">
+            <h3>Contact</h3>
+            <div class="contact-row">
+                <span class="label">Email</span>
+                <span class="val"><a href="mailto:aghayev0003@gmail.com">aghayev0003@gmail.com</a></span>
+            </div>
+            <div class="contact-row">
+                <span class="label">GitHub</span>
+                <span class="val"><a href="https://github.com/aghayev3" target="_blank" rel="noopener">github.com/aghayev3</a></span>
+            </div>
+            <div class="contact-row">
+                <span class="label">LinkedIn</span>
+                <span class="val"><a href="https://linkedin.com/in/babak-aghayev" target="_blank" rel="noopener">linkedin.com/in/babak-aghayev</a></span>
+            </div>
+            <div class="contact-row">
+                <span class="label">Location</span>
+                <span class="val">Baku, Azerbaijan</span>
+            </div>
+            <div class="contact-row">
+                <span class="label">Phone</span>
+                <span class="val">+994 50 554 97 15</span>
+            </div>
         </div>
     </div>
 </section>
-
-<!-- CERTS + CONTACT -->
-<div class="bottom-grid" id="certs">
-    <section>
-        <h2>Certifications</h2>
-        <ul class="cert-list">
-            <li><span class="c-name">CompTIA Security+</span><span class="c-date">Nov 2025</span></li>
-            <li><span class="c-name">Cisco CCNA</span><span class="c-date">Apr 2023</span></li>
-            <li><span class="c-name">Google Cybersecurity Specialization</span><span class="c-date">2025</span></li>
-            <li><span class="c-name">Google IT Automation with Python</span><span class="c-date">2025</span></li>
-            <li><span class="c-name">Google IT Support Professional</span><span class="c-date">2025</span></li>
-            <li><span class="c-name">Google Prompting &amp; AI Essentials</span><span class="c-date">2025</span></li>
-            <li><span class="c-name">AzCC Technion Blue Team — Cohort 7, #1</span><span class="c-date">2026</span></li>
-            <li><span class="c-name">B.S. Computer Science — Magna Cum Laude</span><span class="c-date">2024</span></li>
-        </ul>
-    </section>
-    <section id="contact">
-        <h2>Contact</h2>
-        <div class="contact-item">
-            <span class="contact-label">Email</span>
-            <span class="contact-val"><a href="mailto:aghayev0003@gmail.com">aghayev0003@gmail.com</a></span>
-        </div>
-        <div class="contact-item">
-            <span class="contact-label">GitHub</span>
-            <span class="contact-val"><a href="https://github.com/aghayev3" target="_blank" rel="noopener">github.com/aghayev3</a></span>
-        </div>
-        <div class="contact-item">
-            <span class="contact-label">LinkedIn</span>
-            <span class="contact-val"><a href="https://linkedin.com/in/babak-aghayev" target="_blank" rel="noopener">linkedin.com/in/babak-aghayev</a></span>
-        </div>
-        <div class="contact-item">
-            <span class="contact-label">Location</span>
-            <span class="contact-val">Baku, Azerbaijan</span>
-        </div>
-        <div class="contact-item">
-            <span class="contact-label">Phone</span>
-            <span class="contact-val">+994 50 554 97 15</span>
-        </div>
-    </section>
-</div>
 
 <!-- FOOTER -->
 <footer>
