@@ -239,15 +239,14 @@
 
     .cert-grid {
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 20px;
-      max-width: 600px;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
     }
     .cert-card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 14px;
+      padding: 20px;
       text-align: center;
       transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
     }
@@ -425,7 +424,7 @@
     </div>
 
     <div class="milestone">
-      <div class="milestone-date">Jan–Jul 2026</div>
+      <div class="milestone-date">Jul 2026</div>
       <div class="milestone-content">
         <div class="milestone-title">ACC Technion Blue Team Programme — Cohort 7</div>
         <div class="milestone-desc">
@@ -460,6 +459,10 @@
         <div class="cert-label">Google Prompting Essentials — Apr 2025</div>
       </div>
       <div class="cert-card">
+        <a href="certs/google_ai_essentials.png" target="_blank"><img src="certs/google_ai_essentials.png" alt="Google AI Essentials"></a>
+        <div class="cert-label">Google AI Essentials — Apr 2025</div>
+      </div>
+      <div class="cert-card">
         <a href="certs/google_it_support.png" target="_blank"><img src="certs/google_it_support.png" alt="Google IT Support"></a>
         <div class="cert-label">Google IT Support — Mar 2025</div>
       </div>
@@ -474,10 +477,6 @@
       <div class="cert-card">
         <a href="certs/ccna.png" target="_blank"><img src="certs/ccna.png" alt="Cisco CCNA"></a>
         <div class="cert-label">Cisco CCNA — Apr 2023</div>
-      </div>
-      <div class="cert-card">
-        <a href="certs/google_ai_essentials.png" target="_blank"><img src="certs/google_ai_essentials.png" alt="Google AI Essentials"></a>
-        <div class="cert-label">Google AI Essentials — 2025</div>
       </div>
     </div>
   </section>
