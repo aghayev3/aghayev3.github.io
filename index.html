@@ -17,6 +17,7 @@
       --fg-faint:  #3a3a3a;
       --accent:    #6b9fff;
       --accent-dim: rgba(107, 159, 255, 0.08);
+      --accent-glow: rgba(107, 159, 255, 0.15);
       --mono:      'SF Mono', 'Cascadia Code', Consolas, 'Liberation Mono', monospace;
       --sans:      -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, Roboto, 'Helvetica Neue', sans-serif;
       --radius:    6px;
@@ -35,6 +36,11 @@
     }
 
     ::selection { background: var(--accent); color: #000; }
+
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
 
     .wrap { max-width: 100%; padding: 0 64px; }
 
@@ -61,25 +67,50 @@
       text-decoration: none;
       letter-spacing: 0.5px;
     }
+    .nav-brand:hover { opacity: 0.8; }
     .nav-links { display: flex; gap: 36px; }
     .nav-links a {
       color: var(--fg-dim);
       text-decoration: none;
       font-size: 16px;
       font-weight: 500;
-      transition: color 0.2s;
+      position: relative;
+      padding-bottom: 2px;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background: var(--accent);
+      transition: width 0.25s ease;
     }
     .nav-links a:hover { color: var(--fg); }
+    .nav-links a:hover::after { width: 100%; }
 
     .hero {
-      padding: 160px 0 96px;
+      padding: 160px 0 80px;
       text-align: center;
+      position: relative;
+    }
+    .hero::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 2px;
+      background: var(--accent);
+      margin: 56px auto 0;
+      border-radius: 1px;
+      opacity: 0.4;
     }
     .hero-name {
       font-size: 72px;
       font-weight: 700;
       letter-spacing: -2px;
       margin-bottom: 14px;
+      line-height: 1.1;
     }
     .hero-line {
       font-family: var(--mono);
@@ -87,9 +118,7 @@
       color: var(--fg-dim);
       margin-bottom: 36px;
     }
-    .hero-line span {
-      color: var(--accent);
-    }
+    .hero-line span { color: var(--accent); }
     .hero-desc {
       color: var(--fg-dim);
       max-width: 800px;
@@ -105,33 +134,47 @@
     }
     .section-label {
       font-family: var(--mono);
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 3px;
-      color: var(--fg-faint);
+      color: var(--fg-dim);
       margin-bottom: 40px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
     }
 
     .now-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
-      gap: 24px;
+      gap: 20px;
     }
     .now-item {
       display: flex;
       gap: 16px;
       align-items: flex-start;
+      padding: 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      border-left: 2px solid var(--accent-dim);
     }
     .now-marker {
       font-family: var(--mono);
-      font-size: 15px;
+      font-size: 14px;
       color: var(--accent);
       flex-shrink: 0;
       margin-top: 4px;
     }
     .now-text {
-      font-size: 17px;
+      font-size: 16px;
       color: var(--fg-dim);
       line-height: 1.7;
     }
@@ -143,19 +186,26 @@
     }
     .milestone {
       display: flex;
-      gap: 24px;
+      gap: 20px;
       padding: 24px;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
+      border-left: 3px solid var(--accent);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .milestone:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent-dim);
     }
     .milestone-date {
       font-family: var(--mono);
-      font-size: 14px;
-      color: var(--fg-faint);
+      font-size: 13px;
+      color: var(--accent);
       flex-shrink: 0;
-      width: 100px;
-      padding-top: 2px;
+      width: 90px;
+      padding-top: 3px;
+      font-weight: 500;
     }
     .milestone-content { flex: 1; }
     .milestone-title {
@@ -163,47 +213,107 @@
       font-weight: 600;
       color: var(--fg);
       margin-bottom: 6px;
+      line-height: 1.4;
     }
     .milestone-desc {
       font-size: 15px;
       color: var(--fg-dim);
-      line-height: 1.6;
+      line-height: 1.65;
+    }
+    .cert-link {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 13px;
+      font-family: var(--mono);
+      color: var(--accent);
+      text-decoration: none;
+      padding: 4px 10px;
+      border: 1px solid var(--accent-dim);
+      border-radius: 4px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .cert-link:hover {
+      background: var(--accent-dim);
+      border-color: var(--accent);
     }
 
     .cert-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
       gap: 20px;
     }
     .cert-card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 16px;
+      padding: 14px;
       text-align: center;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
     }
+    .cert-card:hover {
+      border-color: var(--accent-dim);
+      box-shadow: 0 0 20px rgba(107, 159, 255, 0.06);
+      transform: translateY(-2px);
+    }
+    .cert-card a {
+      display: block;
+      position: relative;
+    }
+    .cert-card a::after {
+      content: 'open';
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      font-family: var(--mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--fg);
+      background: rgba(0,0,0,0.7);
+      padding: 2px 8px;
+      border-radius: 3px;
+      opacity: 0;
+      transition: opacity 0.2s;
+      pointer-events: none;
+    }
+    .cert-card a:hover::after { opacity: 1; }
     .cert-card img {
       max-width: 100%;
       height: auto;
       border-radius: 4px;
-      cursor: pointer;
+      display: block;
       transition: opacity 0.2s;
     }
-    .cert-card img:hover { opacity: 0.85; }
+    .cert-card img:hover { opacity: 0.9; }
     .cert-label {
-      font-size: 14px;
+      font-size: 13px;
       color: var(--fg-dim);
       margin-top: 10px;
+      line-height: 1.4;
     }
 
-    .links { display: flex; gap: 36px; flex-wrap: wrap; }
+    .links { display: flex; gap: 40px; flex-wrap: wrap; }
     .links a {
       color: var(--fg-dim);
       text-decoration: none;
       font-size: 17px;
+      font-weight: 500;
+      position: relative;
+      padding-bottom: 2px;
       transition: color 0.2s;
     }
-    .links a:hover { color: var(--accent); }
+    .links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background: var(--accent);
+      transition: width 0.25s ease;
+    }
+    .links a:hover { color: var(--fg); }
+    .links a:hover::after { width: 100%; }
 
     footer {
       padding: 48px 0 80px;
@@ -223,24 +333,32 @@
       .hero { padding: 110px 0 64px; }
       .hero-name { font-size: 48px; }
       .hero-line { font-size: 18px; }
-      .hero-desc { font-size: 17px; max-width: 600px; }
+      .hero-desc { font-size: 17px; }
+      .section-label { font-size: 12px; }
       .now-grid { grid-template-columns: 1fr; }
       .milestones-grid { grid-template-columns: 1fr; }
       .nav-links { gap: 24px; }
       .nav-links a { font-size: 15px; }
+      .now-text { font-size: 15px; }
+      .milestone-title { font-size: 16px; }
     }
 
     @media (max-width: 600px) {
       .wrap { padding: 0 20px; }
       body { font-size: 15px; }
       .hero { padding: 80px 0 48px; }
+      .hero::after { margin-top: 40px; }
       .hero-name { font-size: 34px; }
       .hero-line { font-size: 15px; }
       .hero-desc { font-size: 15px; }
       .nav-links { gap: 14px; }
       .nav-links a { font-size: 13px; }
+      .section-label { font-size: 11px; }
+      .milestone { flex-direction: column; gap: 8px; }
+      .milestone-date { width: auto; }
+      .now-item { padding: 16px; }
       .cert-grid { grid-template-columns: repeat(2, 1fr); }
-      footer { flex-direction: column; gap: 6px; align-items: flex-start; }
+      footer { flex-direction: column; gap: 8px; align-items: flex-start; }
     }
 
     @media (max-width: 420px) {
@@ -280,23 +398,23 @@
     <div class="section-label">/now</div>
     <div class="now-grid">
       <div class="now-item">
-        <span class="now-marker">-></span>
+        <span class="now-marker">-&gt;</span>
         <span class="now-text">Finding my deep focus in cybersecurity — the branch I'll go all-in on</span>
       </div>
       <div class="now-item">
-        <span class="now-marker">-></span>
+        <span class="now-marker">-&gt;</span>
         <span class="now-text">Developing IDRIS further through CyberPark, the Center's startup division</span>
       </div>
       <div class="now-item">
-        <span class="now-marker">-></span>
+        <span class="now-marker">-&gt;</span>
         <span class="now-text">Preparing for a one-month cybersecurity internship in Israel (Fall 2026)</span>
       </div>
       <div class="now-item">
-        <span class="now-marker">-></span>
+        <span class="now-marker">-&gt;</span>
         <span class="now-text">Building this page — a living record of becoming who I want to be</span>
       </div>
     </div>
-    <p style="color:var(--fg-faint); font-size:12px; font-family:var(--mono); margin-top:20px;">Updated Jul 2026</p>
+    <p style="color:var(--fg-faint); font-size:12px; font-family:var(--mono); margin-top:24px;">Updated Jul 2026</p>
   </section>
 
   <section id="accomplishments">
@@ -307,7 +425,7 @@
       <div class="milestone-date">Apr 2023</div>
       <div class="milestone-content">
         <div class="milestone-title">Cisco CCNA</div>
-        <div class="milestone-desc"><a href="#certs" style="color:var(--accent); text-decoration:none;">View certificate &rarr;</a></div>
+        <div class="milestone-desc"><a href="#certs" class="cert-link">View certificate &rarr;</a></div>
       </div>
     </div>
 
@@ -315,7 +433,7 @@
       <div class="milestone-date">Dec 2024</div>
       <div class="milestone-content">
         <div class="milestone-title">B.S. Computer Science — Magna Cum Laude</div>
-        <div class="milestone-desc">University of Mary Hardin-Baylor. GPA 3.8. <a href="#certs" style="color:var(--accent); text-decoration:none;">View diploma &rarr;</a></div>
+        <div class="milestone-desc">University of Mary Hardin-Baylor. GPA 3.8. <a href="#certs" class="cert-link">View diploma &rarr;</a></div>
       </div>
     </div>
 
@@ -323,7 +441,7 @@
       <div class="milestone-date">Nov 2025</div>
       <div class="milestone-content">
         <div class="milestone-title">CompTIA Security+</div>
-        <div class="milestone-desc"><a href="#certs" style="color:var(--accent); text-decoration:none;">View certificate &rarr;</a></div>
+        <div class="milestone-desc"><a href="#certs" class="cert-link">View certificate &rarr;</a></div>
       </div>
     </div>
 
@@ -331,7 +449,7 @@
       <div class="milestone-date">Jul 22, 2026</div>
       <div class="milestone-content">
         <div class="milestone-title">ACC Technion Blue Team Diploma — #1 Graduate</div>
-        <div class="milestone-desc">Awarded diploma from the Azerbaijan Cybersecurity Center & Technion — Israel Institute of Technology. Ranked 1st in a cohort of 60 selected from 2,100+ applicants. <a href="#certs" style="color:var(--accent); text-decoration:none;">View diploma &rarr;</a></div>
+        <div class="milestone-desc">Awarded diploma from the Azerbaijan Cybersecurity Center &amp; Technion — Israel Institute of Technology. Ranked 1st in a cohort of 60 selected from 2,100+ applicants. <a href="#certs" class="cert-link">View diploma &rarr;</a></div>
       </div>
     </div>
 
@@ -339,7 +457,7 @@
       <div class="milestone-date">Jul 2026</div>
       <div class="milestone-content">
         <div class="milestone-title">IDRIS Places 2nd in Capstone Competition</div>
-        <div class="milestone-desc">Self-hosted ITDR platform nominated to CyberPark startup division. Covers the full AD identity kill-chain with Sigma detection, AI remediation, and a detect-fix-retest loop. Part of the <a href="#certs" style="color:var(--accent); text-decoration:none;">ACC Technion programme</a>.</div>
+        <div class="milestone-desc">Self-hosted ITDR platform nominated to CyberPark startup division. Covers the full AD identity kill-chain with Sigma detection, AI remediation, and a detect-fix-retest loop. Part of the <a href="#certs" class="cert-link">ACC Technion programme</a>.</div>
       </div>
     </div>
   </div>
