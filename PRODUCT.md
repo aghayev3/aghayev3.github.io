@@ -12,9 +12,7 @@ Static HTML/CSS, hosted on GitHub Pages from the `aghayev3/aghayev3.github.io` r
 
 ## Users
 
-Prospective freelance clients who need a web application security assessment and are deciding whether Babak is credible enough to talk to. They arrive from LinkedIn, GitHub, or a direct link, scan for proof of skill, and decide in a minute or two.
-
-Open decision: which clients exactly (startups, small businesses, agencies, other) has not been confirmed.
+Founders and technical leads at startups and small businesses who need a web application security assessment and are deciding whether Babak is credible enough to talk to. Most are not security specialists: they will not recognise lab platforms or jargon, so proof must read plainly. They arrive from LinkedIn, GitHub, or a direct link, scan for proof of skill, and decide in a minute or two.
 
 ## Product Purpose
 
@@ -24,11 +22,16 @@ A personal site that positions Babak Aghayev as a freelance web application secu
 
 Babak is repositioning from blue team / DFIR / security operations toward offensive web application security, built on a defensive background. The incumbent site still presents the blue team direction; that copy is out of date and future work must reflect the web app security focus.
 
-Open decision: the specific services offered (for example pentests, code review, retesting) and how engagements work have not been confirmed.
+Services:
+- Web application penetration testing.
+- Retesting after the client has fixed the findings.
+- Add-on, not a standalone service: testing with source access when the client shares their code. Standalone secure code review is deliberately not offered until there is proof for it.
+
+Open decision: pricing, engagement length, and how an engagement starts have not been confirmed.
 
 ## Operating Context
 
-- Currently working through the PortSwigger Web Security Academy labs. This is in progress, and is the main ongoing proof of the new focus.
+- Currently working through the PortSwigger Web Security Academy labs. This is in progress, and is the main ongoing proof of the new focus. The site does not connect to PortSwigger live; progress, if shown, is a manually updated figure, and lab writeups (on GitHub) are the preferred proof. Under consideration: stating the Burp Suite Certified Practitioner (BSCP) exam as a goal.
 - One-month cybersecurity internship in Israel planned for Fall 2026.
 - Developing IDRIS (capstone project) further through CyberPark, the startup division of the Azerbaijan Cybersecurity Center.
 
