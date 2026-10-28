@@ -11,6 +11,15 @@
         ],
         "createdAt": "2026-10-28T05:07:47.893Z",
         "reason": "Claude: user asked for a mid-90s Netscape-style page; Arial/Helvetica is the period heading face"
+      },
+      {
+        "rule": "tight-leading",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-10-28T06:09:18.804Z",
+        "reason": "Claude: scanner reports 1.18x with no element named; measured every text element in a real browser (Playwright, 2026-10-28) and none is below 1.3x. Remove this ignore if line spacing changes."
       }
     ]
   }
