@@ -78,6 +78,11 @@
   .figure img { width: 220px; height: auto; border: 2px solid var(--link); display: block; filter: grayscale(1) contrast(1.2); }
   .clear { clear: both; }
 
+  /* Certificate thumbnails: shown in colour, as issued; linked images keep the blue border */
+  table.thumbs { table-layout: fixed; }
+  table.thumbs td { width: 50%; text-align: center; font-size: 15px; line-height: 1.35; padding: 8px; }
+  table.thumbs img { display: block; width: 100%; height: auto; box-sizing: border-box; border: 2px solid var(--link); margin: 0 0 6px; }
+
   .badge {
     display: inline-block; width: 112px; height: 40px; vertical-align: middle; text-decoration: none;
     border: 2px outset var(--hi); background: #000; color: #fff;
@@ -159,27 +164,36 @@ HTTP/1.1 200 OK
   <tr><th>Result</th><th>What for</th><th>When</th></tr>
   <tr><td class="n">1st of 60</td><td>ACC Technion Blue Team Programme, Cohort 7. Chosen from more than 2,100 applicants. Graduated with honours.</td><td>2026</td></tr>
   <tr><td class="n">Top 5</td><td>Selected for a one-month cybersecurity internship in Israel.</td><td>Fall 2026</td></tr>
-  <tr><td class="n">2nd</td><td>IDRIS, the capstone project I led. Nominated to CyberPark.</td><td>2026</td></tr>
   <tr><td class="n">3.8 GPA</td><td>B.S. Computer Science, magna cum laude. University of Mary Hardin-Baylor. [<a href="certs/undergraduate_diploma.png">diploma</a>]</td><td>2024</td></tr>
 </table>
 
 <h3>Certificates</h3>
-<ul>
-  <li><a href="certs/security_plus.png">CompTIA Security+</a> (Nov 2025)</li>
-  <li><a href="certs/google_cybersecurity.png">Google Cybersecurity</a> (Sep 2025)</li>
-  <li><a href="certs/google_it_automation_with_python.png">Google IT Automation with Python</a> (Apr 2025)</li>
-  <li><a href="certs/google_ai_essentials.png">Google AI Essentials</a> and <a href="certs/google_prompting_essentials.png">Google Prompting Essentials</a> (Apr 2025)</li>
-  <li><a href="certs/google_it_support.png">Google IT Support</a> (Mar 2025)</li>
-  <li><a href="certs/cs50x.png">Harvard CS50x</a> (2024)</li>
-  <li><a href="certs/ccna.png">Cisco CCNA</a> (Apr 2023)</li>
-</ul>
+<p class="small">Click a certificate to see it full size.</p>
+<table class="bevel thumbs">
+  <tr>
+    <td><a href="certs/security_plus.png"><img src="certs/thumbs/security_plus.jpg" width="560" height="433" alt="CompTIA Security+ certificate" loading="lazy"></a><a href="certs/security_plus.png">CompTIA Security+</a><br>Nov 2025</td>
+    <td><a href="certs/google_cybersecurity.png"><img src="certs/thumbs/google_cybersecurity.jpg" width="560" height="433" alt="Google Cybersecurity certificate" loading="lazy"></a><a href="certs/google_cybersecurity.png">Google Cybersecurity</a><br>Sep 2025</td>
+  </tr>
+  <tr>
+    <td><a href="certs/google_it_automation_with_python.png"><img src="certs/thumbs/google_it_automation_with_python.jpg" width="560" height="433" alt="Google IT Automation with Python certificate" loading="lazy"></a><a href="certs/google_it_automation_with_python.png">Google IT Automation with Python</a><br>Apr 2025</td>
+    <td><a href="certs/google_ai_essentials.png"><img src="certs/thumbs/google_ai_essentials.jpg" width="560" height="433" alt="Google AI Essentials certificate" loading="lazy"></a><a href="certs/google_ai_essentials.png">Google AI Essentials</a><br>Apr 2025</td>
+  </tr>
+  <tr>
+    <td><a href="certs/google_prompting_essentials.png"><img src="certs/thumbs/google_prompting_essentials.jpg" width="560" height="433" alt="Google Prompting Essentials certificate" loading="lazy"></a><a href="certs/google_prompting_essentials.png">Google Prompting Essentials</a><br>Apr 2025</td>
+    <td><a href="certs/google_it_support.png"><img src="certs/thumbs/google_it_support.jpg" width="560" height="433" alt="Google IT Support certificate" loading="lazy"></a><a href="certs/google_it_support.png">Google IT Support</a><br>Mar 2025</td>
+  </tr>
+  <tr>
+    <td><a href="certs/cs50x.png"><img src="certs/thumbs/cs50x.jpg" width="560" height="433" alt="Harvard CS50x certificate" loading="lazy"></a><a href="certs/cs50x.png">Harvard CS50x</a><br>2024</td>
+    <td><a href="certs/ccna.png"><img src="certs/thumbs/ccna.jpg" width="560" height="433" alt="Cisco CCNA certificate" loading="lazy"></a><a href="certs/ccna.png">Cisco CCNA</a><br>Apr 2023</td>
+  </tr>
+</table>
 
 <hr>
 
 <h2 id="new">What's New</h2>
 <dl>
   <dt><b>Now</b></dt>
-  <dd>Working through the PortSwigger Web Security Academy, the training ground built by the makers of Burp Suite. Next goal: the Burp Suite Certified Practitioner exam.</dd>
+  <dd>Preparing for the Burp Suite Certified Practitioner (BSCP) exam. It is a hands-on exam: you have to break into real web apps, not answer multiple-choice questions.</dd>
   <dt><b>Fall 2026</b></dt>
   <dd>One-month cybersecurity internship in Israel.</dd>
   <dt><b>July 2026</b></dt>

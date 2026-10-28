@@ -31,9 +31,9 @@ Open decision: pricing, engagement length, and how an engagement starts have not
 
 ## Operating Context
 
-- Currently working through the PortSwigger Web Security Academy labs. This is in progress, and is the main ongoing proof of the new focus. The site does not connect to PortSwigger live; progress, if shown, is a manually updated figure, and lab writeups (on GitHub) are the preferred proof. Under consideration: stating the Burp Suite Certified Practitioner (BSCP) exam as a goal.
+- Preparing for the Burp Suite Certified Practitioner (BSCP) exam. The site states this as the current goal. Decided 2026-10-28: the site names BSCP but does not mention PortSwigger or the Web Security Academy, and shows no lab progress figures. Lab writeups on GitHub remain an option.
 - One-month cybersecurity internship in Israel planned for Fall 2026.
-- Developing IDRIS (capstone project) further through CyberPark, the startup division of the Azerbaijan Cybersecurity Center.
+- Decided 2026-10-28: IDRIS (the capstone project) is not mentioned on the site.
 
 ## Capabilities and Constraints
 
@@ -52,7 +52,7 @@ Open decision: pricing, engagement length, and how an engagement starts have not
 - B.S. Computer Science, Magna Cum Laude, University of Mary Hardin-Baylor (Dec 2024): GPA 3.8, Presidential Scholarship. Diploma: `certs/undergraduate_diploma.png`.
 - Certificates in `certs/`: CompTIA Security+ (Nov 2025), Google Cybersecurity (Sep 2025), Google IT Automation with Python (Apr 2025), Google Prompting Essentials (Apr 2025), Google AI Essentials (Apr 2025), Google IT Support (Mar 2025), CS50x (2024), Cisco CCNA (Apr 2023).
 
-Absent, and must not be fabricated: freelance clients, client testimonials, case studies, paid engagements, bug bounty results, CVEs, and PortSwigger progress numbers. PortSwigger progress may only be shown with figures Babak supplies.
+Absent, and must not be fabricated: freelance clients, client testimonials, case studies, paid engagements, bug bounty results, CVEs, and lab progress numbers.
 
 ## Product Principles
 
