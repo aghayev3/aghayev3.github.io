@@ -50,7 +50,7 @@ Open decision: pricing, engagement length, and how an engagement starts have not
 
 - ACC Technion Blue Team Programme, Cohort 7 (Jul 2026): selected as 1 of 60 from 2,100+ applicants, graduated #1 in the cohort with honours, Top 5 graduate chosen for the Israel internship, led capstone IDRIS (2nd in cohort competition, nominated to CyberPark). Diploma: `certs/technion_diploma.jpg`.
 - B.S. Computer Science, Magna Cum Laude, University of Mary Hardin-Baylor (Dec 2024): GPA 3.8, Presidential Scholarship. Diploma: `certs/undergraduate_diploma.png`.
-- Certificates in `certs/`: CompTIA Security+ (Nov 2025), Google Cybersecurity (Sep 2025), Google IT Automation with Python (Apr 2025), Google Prompting Essentials (Apr 2025), Google AI Essentials (Apr 2025), Google IT Support (Mar 2025), CS50x (2024), Cisco CCNA (Apr 2023).
+- Certificates in `certs/`: CompTIA Security+ (Nov 2025), Google Cybersecurity (Sep 2025), Google IT Automation with Python (Apr 2025), Google Prompting Essentials (Apr 2025), Google AI Essentials (Apr 2025), Google IT Support (Mar 2025), CS50x (Apr 2024), Cisco CCNA (Apr 2023).
 
 Absent, and must not be fabricated: freelance clients, client testimonials, case studies, paid engagements, bug bounty results, CVEs, and lab progress numbers.
 

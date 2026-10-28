@@ -40,7 +40,7 @@ The content idea runs through it: **every lock gets tested.** In 1851 Alfred Hob
 ## Components
 
 - **Bevelled tables:** outset 2px outer border, inset 1px cell borders, 2px cell spacing, navy header row. Used for Services and Results.
-- **Certificate thumbnails:** a two-column bevelled table under Results. Each cell is a small preview (`certs/thumbs/`, 560px JPEG made from the full image) with a blue link border, then the name and date; picture and name both open the full certificate. Shown in colour, as issued, unlike the greyscale engravings. No verify links (decided 2026-10-28).
+- **Certificate thumbnails:** a two-column bevelled table under Results. Each cell is a small preview (`certs/thumbs/`, 560px JPEG made from the full image) with a blue link border, then the name and date; picture and name both open the full certificate. Shown in colour, as issued, unlike the greyscale engravings. No verify links (decided 2026-10-28). Only four are shown, Security+, Google Cybersecurity, CS50x and CCNA; the entry-level Coursera certificates (IT Automation, AI Essentials, Prompting Essentials, IT Support) are left off the page so they do not crowd the stronger evidence.
 - **Window panel:** grey outset box with a navy title bar. Used for the demo ("Order Lookup").
 - **Buttons:** Windows 95 grey, 2px outset border, inset while pressed. The main action, "Connect on LinkedIn", is one of these, right under the intro.
 - **What's New:** a dated `<dl>` list, newest first, real events only.
