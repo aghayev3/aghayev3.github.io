@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "arial",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-10-28T05:07:47.893Z",
+        "reason": "Claude: user asked for a mid-90s Netscape-style page; Arial/Helvetica is the period heading face"
+      }
+    ]
+  }
+}

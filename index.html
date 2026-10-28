@@ -1,465 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Babak Aghayev — Cybersecurity. Building something intentional.">
-  <title>Babak Aghayev</title>
-  <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Babak Aghayev - Web Application Security Testing</title>
+<meta name="description" content="Babak Aghayev tests web apps for startups and small businesses and finds the holes before attackers do.">
+<link rel="canonical" href="https://aghayev3.github.io/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://aghayev3.github.io/">
+<meta property="og:title" content="Babak Aghayev - Web Application Security Testing">
+<meta property="og:description" content="I test web apps for startups and small businesses, and find the holes before attackers do.">
+<meta property="og:image" content="https://aghayev3.github.io/assets/chubb-engraving.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+  /* Netscape Navigator 3.0, as a careful webmaster would have set it up in 1996:
+     browser-default grey, Times for text, Arial for headings, one 600px column. */
+  :root {
+    --grey: #c0c0c0;
+    --hi: #ffffff;
+    --lo: #808080;
+    --dark: #404040;
+    --link: #0000ee;
+    --visited: #551a8b;
+    --active: #ff0000;
+    --navy: #000080;
+  }
+  html { background: var(--grey); }
+  body {
+    margin: 0 auto; max-width: 600px; padding: 16px 16px 32px;
+    background: var(--grey); color: #000;
+    font: 17px/1.4 'Times New Roman', Times, serif;
+  }
+  a:link { color: var(--link); }
+  a:visited { color: var(--visited); }
+  a:active { color: var(--active); }
+  h1, h2, h3 { font-family: Arial, Helvetica, sans-serif; line-height: 1.3; }
+  .tagline, .nav { line-height: 1.4; }
+  h1 { font-size: 30px; margin: 10px 0 2px; }
+  h2 { font-size: 21px; margin: 22px 0 8px; }
+  h3 { font-size: 17px; margin: 14px 0 4px; }
+  p { margin: 0 0 12px; }
+  hr { border: 0; border-top: 1px solid var(--lo); border-bottom: 1px solid var(--hi); height: 0; margin: 18px 0; }
+  hr.thick { border-top-width: 2px; border-bottom-width: 2px; }
+  address { font-style: italic; }
+  tt, code, pre, kbd { font-family: 'Courier New', Courier, monospace; }
 
-    :root {
-      --bg:        #0a0a0a;
-      --surface:   #111111;
-      --border:    #1c1c1c;
-      --fg:        #e6e6e6;
-      --fg-dim:    #7a7a7a;
-      --fg-faint:  #3a3a3a;
-      --accent:    #6b9fff;
-      --accent-dim: rgba(107, 159, 255, 0.08);
-      --accent-glow: rgba(107, 159, 255, 0.15);
-      --mono:      'SF Mono', 'Cascadia Code', Consolas, 'Liberation Mono', monospace;
-      --sans:      -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, Roboto, 'Helvetica Neue', sans-serif;
-      --radius:    6px;
-    }
+  .masthead { text-align: center; }
+  .masthead img { width: 300px; max-width: 100%; height: auto; border: 0; filter: grayscale(1) contrast(1.25); }
+  .tagline { font-size: 19px; margin-top: 6px; }
+  .nav { text-align: center; font-family: Arial, Helvetica, sans-serif; font-size: 15px; margin: 10px 0 0; }
 
-    html { scroll-behavior: smooth; }
+  /* Bevelled tables, the way <table border> rendered */
+  table.bevel { border: 2px outset var(--hi); border-collapse: separate; border-spacing: 2px; width: 100%; background: var(--grey); }
+  table.bevel th, table.bevel td { border: 1px inset var(--hi); padding: 6px 7px; vertical-align: top; text-align: left; }
+  table.bevel th { background: var(--navy); color: #fff; font: bold 15px/1.35 Arial, Helvetica, sans-serif; }
+  table.bevel td.n { font: bold 17px/1.35 Arial, Helvetica, sans-serif; white-space: nowrap; }
 
-    body {
-      background: var(--bg);
-      color: var(--fg);
-      font-family: var(--sans);
-      font-size: 18px;
-      line-height: 1.75;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
+  .win { border: 2px outset var(--hi); background: var(--grey); padding: 3px; }
+  .win .title { background: var(--navy); color: #fff; font: bold 14px/1.35 Arial, Helvetica, sans-serif; padding: 3px 6px; }
+  .win .body { padding: 10px; }
+  .btn, .win button {
+    font: 15px/1.35 Arial, Helvetica, sans-serif; color: #000; background: var(--grey);
+    border: 2px outset var(--hi); padding: 4px 12px; cursor: pointer;
+  }
+  .btn:active, .win button:active { border-style: inset; }
+  a.btn:link, a.btn:visited { color: #000; text-decoration: none; display: inline-block; }
+  .win input[type=text] {
+    font: 16px/1.3 'Courier New', Courier, monospace; width: 7ch; padding: 3px 4px;
+    border: 2px inset var(--hi); background: #fff;
+  }
+  .win pre { background: #fff; border: 2px inset var(--hi); padding: 8px; margin: 10px 0 0; font-size: 14px; white-space: pre-wrap; min-height: 15em; }
+  [data-verdict] { margin: 10px 0 0; }
+  [data-state=leak] [data-verdict] { color: #8b0000; font-weight: bold; }
 
-    ::selection { background: var(--accent); color: #000; }
+  .figure { float: right; margin: 4px 0 8px 14px; text-align: center; font-size: 14px; width: 220px; }
+  .figure img { width: 220px; height: auto; border: 2px solid var(--link); display: block; filter: grayscale(1) contrast(1.2); }
+  .clear { clear: both; }
 
-    :focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 3px;
-    }
+  .badge {
+    display: inline-block; width: 112px; height: 40px; vertical-align: middle; text-decoration: none;
+    border: 2px outset var(--hi); background: #000; color: #fff;
+    font: bold 11px/1.35 Arial, Helvetica, sans-serif; text-align: center; padding-top: 4px; box-sizing: border-box;
+  }
+  a.badge:link, a.badge:visited { color: #fff; }
+  .badge b { color: #ffff00; display: block; font-size: 11px; }
+  .counter { font-family: 'Courier New', Courier, monospace; background: #000; color: #00ff00; padding: 1px 5px; letter-spacing: 1px; }
+  .small { font-size: 14px; }
 
-    .wrap { max-width: 100%; padding: 0 64px; }
-
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(10, 10, 10, 0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      height: 68px;
-    }
-    .nav-brand {
-      font-family: var(--mono);
-      font-size: 17px;
-      font-weight: 600;
-      color: var(--accent);
-      text-decoration: none;
-      letter-spacing: 0.5px;
-    }
-    .nav-brand:hover { opacity: 0.8; }
-    .nav-links { display: flex; gap: 36px; }
-    .nav-links a {
-      color: var(--fg-dim);
-      text-decoration: none;
-      font-size: 16px;
-      font-weight: 500;
-      position: relative;
-      padding-bottom: 2px;
-    }
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      width: 0;
-      height: 1.5px;
-      background: var(--accent);
-      transition: width 0.25s ease;
-    }
-    .nav-links a:hover { color: var(--fg); }
-    .nav-links a:hover::after { width: 100%; }
-
-    .hero {
-      padding: 160px 0 80px;
-      text-align: center;
-      position: relative;
-    }
-    .hero::after {
-      content: '';
-      display: block;
-      width: 60px;
-      height: 2px;
-      background: var(--accent);
-      margin: 56px auto 0;
-      border-radius: 1px;
-      opacity: 0.4;
-    }
-    .hero-name {
-      font-size: 72px;
-      font-weight: 700;
-      letter-spacing: -2px;
-      margin-bottom: 14px;
-      line-height: 1.1;
-    }
-    .hero-line {
-      font-family: var(--mono);
-      font-size: 22px;
-      color: var(--fg-dim);
-      margin-bottom: 36px;
-    }
-    .hero-line span { color: var(--accent); }
-    .hero-desc {
-      color: var(--fg-dim);
-      max-width: 800px;
-      margin: 0 auto;
-      line-height: 1.85;
-      font-size: 20px;
-    }
-    .hero-desc strong { color: var(--fg); font-weight: 600; }
-
-    section {
-      padding: 80px 0;
-      border-top: 1px solid var(--border);
-    }
-    .section-label {
-      font-family: var(--mono);
-      font-size: 13px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      color: var(--fg-dim);
-      margin-bottom: 40px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-    .section-label::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
-
-    .now-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
-      gap: 20px;
-    }
-    .now-item {
-      display: flex;
-      gap: 16px;
-      align-items: flex-start;
-      padding: 20px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      border-left: 2px solid var(--accent-dim);
-    }
-    .now-marker {
-      font-family: var(--mono);
-      font-size: 14px;
-      color: var(--accent);
-      flex-shrink: 0;
-      margin-top: 4px;
-    }
-    .now-text {
-      font-size: 16px;
-      color: var(--fg-dim);
-      line-height: 1.7;
-    }
-
-    .milestones-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(440px, 1fr));
-      gap: 20px 48px;
-    }
-    .milestone {
-      display: flex;
-      gap: 20px;
-      padding: 24px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      border-left: 3px solid var(--accent);
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    .milestone:hover {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 1px var(--accent-dim);
-    }
-    .milestone-date {
-      font-family: var(--mono);
-      font-size: 13px;
-      color: var(--accent);
-      flex-shrink: 0;
-      width: 90px;
-      padding-top: 3px;
-      font-weight: 500;
-    }
-    .milestone-content { flex: 1; }
-    .milestone-title {
-      font-size: 17px;
-      font-weight: 600;
-      color: var(--fg);
-      margin-bottom: 6px;
-      line-height: 1.4;
-    }
-    .milestone-desc {
-      font-size: 15px;
-      color: var(--fg-dim);
-      line-height: 1.65;
-    }
-
-    .cert-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 24px;
-    }
-    .cert-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 20px;
-      text-align: center;
-      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
-    }
-    .cert-card:hover {
-      border-color: var(--accent-dim);
-      box-shadow: 0 0 20px rgba(107, 159, 255, 0.06);
-      transform: translateY(-2px);
-    }
-    .cert-card a {
-      display: block;
-    }
-    .cert-card img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 4px;
-      display: block;
-      transition: opacity 0.2s;
-    }
-    .cert-card img:hover { opacity: 0.9; }
-    .cert-label {
-      font-size: 13px;
-      color: var(--fg-dim);
-      margin-top: 10px;
-      line-height: 1.4;
-    }
-
-    .links { display: flex; gap: 40px; flex-wrap: wrap; }
-    .links a {
-      color: var(--fg-dim);
-      text-decoration: none;
-      font-size: 17px;
-      font-weight: 500;
-      position: relative;
-      padding-bottom: 2px;
-      transition: color 0.2s;
-    }
-    .links a::after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      width: 0;
-      height: 1.5px;
-      background: var(--accent);
-      transition: width 0.25s ease;
-    }
-    .links a:hover { color: var(--fg); }
-    .links a:hover::after { width: 100%; }
-
-    footer {
-      padding: 48px 0 80px;
-      border-top: 1px solid var(--border);
-      font-size: 14px;
-      color: var(--fg-faint);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    footer a { color: var(--fg-faint); text-decoration: none; }
-    footer a:hover { color: var(--fg-dim); }
-
-    @media (max-width: 900px) {
-      .wrap { padding: 0 32px; }
-      body { font-size: 16px; }
-      .hero { padding: 110px 0 64px; }
-      .hero-name { font-size: 48px; }
-      .hero-line { font-size: 18px; }
-      .hero-desc { font-size: 17px; }
-      .section-label { font-size: 12px; }
-      .now-grid { grid-template-columns: 1fr; }
-      .milestones-grid { grid-template-columns: 1fr; }
-      .nav-links { gap: 24px; }
-      .nav-links a { font-size: 15px; }
-      .now-text { font-size: 15px; }
-      .milestone-title { font-size: 16px; }
-    }
-
-    @media (max-width: 600px) {
-      .wrap { padding: 0 20px; }
-      body { font-size: 15px; }
-      .hero { padding: 80px 0 48px; }
-      .hero::after { margin-top: 40px; }
-      .hero-name { font-size: 34px; }
-      .hero-line { font-size: 15px; }
-      .hero-desc { font-size: 15px; }
-      .nav-links { gap: 14px; }
-      .nav-links a { font-size: 13px; }
-      .section-label { font-size: 11px; }
-      .milestone { flex-direction: column; gap: 8px; }
-      .milestone-date { width: auto; }
-      .now-item { padding: 16px; }
-      footer { flex-direction: column; gap: 8px; align-items: flex-start; }
-    }
-  </style>
+  @media (max-width: 480px) {
+    body { font-size: 16px; }
+    .figure { float: none; width: auto; margin: 0 0 12px; }
+    .figure img { width: 100%; }
+    table.bevel td.n { white-space: normal; }
+  }
+</style>
 </head>
 <body>
 
-<nav>
-  <div class="wrap">
-    <div class="nav-inner">
-      <a href="#" class="nav-brand">aghayev3</a>
-      <div class="nav-links">
-        <a href="#now">Now</a>
-        <a href="#accomplishments">Accomplishments</a>
-        <a href="#certs">Credentials</a>
-        <a href="#contact">Contact</a>
-      </div>
-    </div>
-  </div>
-</nav>
-
-<div class="wrap">
-
-  <div class="hero">
-    <h1 class="hero-name">Babak Aghayev</h1>
-    <p class="hero-line"><span>$</span> echo "building something intentional"</p>
-    <p class="hero-desc">
-      I'm at the beginning of the road. I don't know exactly where it leads yet — but I know the direction.
-      <strong>Blue team, DFIR, and security operations.</strong> One day, solo practitioner. Right now, putting in the work.
-    </p>
-  </div>
-
-  <section id="now">
-    <div class="section-label">/now</div>
-    <div class="now-grid">
-      <div class="now-item">
-        <span class="now-marker">-&gt;</span>
-        <span class="now-text">Finding my deep focus in cybersecurity — the branch I'll go all-in on</span>
-      </div>
-      <div class="now-item">
-        <span class="now-marker">-&gt;</span>
-        <span class="now-text">Developing IDRIS further through CyberPark, the Center's startup division</span>
-      </div>
-      <div class="now-item">
-        <span class="now-marker">-&gt;</span>
-        <span class="now-text">Preparing for a one-month cybersecurity internship in Israel (Fall 2026)</span>
-      </div>
-      <div class="now-item">
-        <span class="now-marker">-&gt;</span>
-        <span class="now-text">Building this page — a living record of becoming who I want to be</span>
-      </div>
-    </div>
-    <p style="color:var(--fg-faint); font-size:12px; font-family:var(--mono); margin-top:24px;">Updated Jul 2026</p>
-  </section>
-
-  <section id="accomplishments">
-    <div class="section-label">Accomplishments</div>
-
-    <div class="milestones-grid">
-    <div class="milestone">
-      <div class="milestone-date">Jul 2026</div>
-      <div class="milestone-content">
-        <div class="milestone-title">ACC Technion Blue Team Programme — Cohort 7</div>
-        <div class="milestone-desc">
-           Completed the Azerbaijan Cybersecurity Center &amp; Technion — Israel Institute of Technology programme. Selected as 1 of 60 from 2,100+ applicants and graduated <strong>#1 in the cohort with honours</strong>. Chosen as a Top 5 graduate for a one-month internship in Israel (Fall 2026). Led the capstone project <strong>IDRIS</strong> — placed 2nd in the cohort competition and nominated to CyberPark startup division.
-        </div>
-      </div>
-    </div>
-
-    <div class="milestone">
-      <div class="milestone-date">Dec 2024</div>
-      <div class="milestone-content">
-        <div class="milestone-title">B.S. Computer Science — Magna Cum Laude</div>
-        <div class="milestone-desc">University of Mary Hardin-Baylor. GPA 3.8. Presidential Scholarship recipient. Ranked among the top students in the Computer Science programme.</div>
-      </div>
-    </div>
-  </div>
-  </section>
-
-  <section id="certs">
-    <div class="section-label">Credentials</div>
-    <div class="cert-grid">
-      <div class="cert-card">
-        <a href="certs/technion_diploma.jpg" target="_blank"><img src="certs/technion_diploma.jpg" alt="ACC Technion Blue Team Diploma"></a>
-        <div class="cert-label">ACC Technion Blue Programme — Jul 2026</div>
-      </div>
-      <div class="cert-card">
-        <a href="certs/security_plus.png" target="_blank"><img src="certs/security_plus.png" alt="CompTIA Security+"></a>
-        <div class="cert-label">CompTIA Security+ — Nov 2025</div>
-      </div>
-      <div class="cert-card">
-        <a href="certs/google_cybersecurity.png" target="_blank"><img src="certs/google_cybersecurity.png" alt="Google Cybersecurity"></a>
-        <div class="cert-label">Google Cybersecurity — Sep 2025</div>
-      </div>
-      <div class="cert-card">
-        <a href="certs/google_it_automation_with_python.png" target="_blank"><img src="certs/google_it_automation_with_python.png" alt="Google IT Automation with Python"></a>
-        <div class="cert-label">Google IT Automation — Apr 2025</div>
-      </div>
-      <div class="cert-card">
-        <a href="certs/google_prompting_essentials.png" target="_blank"><img src="certs/google_prompting_essentials.png" alt="Google Prompting Essentials"></a>
-        <div class="cert-label">Google Prompting Essentials — Apr 2025</div>
-      </div>
-      <div class="cert-card">
-        <a href="certs/google_ai_essentials.png" target="_blank"><img src="certs/google_ai_essentials.png" alt="Google AI Essentials"></a>
-        <div class="cert-label">Google AI Essentials — Apr 2025</div>
-      </div>
-      <div class="cert-card">
-        <a href="certs/google_it_support.png" target="_blank"><img src="certs/google_it_support.png" alt="Google IT Support"></a>
-        <div class="cert-label">Google IT Support — Mar 2025</div>
-      </div>
-      <div class="cert-card">
-        <a href="certs/undergraduate_diploma.png" target="_blank"><img src="certs/undergraduate_diploma.png" alt="B.S. Computer Science"></a>
-        <div class="cert-label">B.S. Computer Science — Dec 2024</div>
-      </div>
-      <div class="cert-card">
-        <a href="certs/cs50x.png" target="_blank"><img src="certs/cs50x.png" alt="CS50x"></a>
-        <div class="cert-label">CS50x — 2024</div>
-      </div>
-      <div class="cert-card">
-        <a href="certs/ccna.png" target="_blank"><img src="certs/ccna.png" alt="Cisco CCNA"></a>
-        <div class="cert-label">Cisco CCNA — Apr 2023</div>
-      </div>
-    </div>
-  </section>
-
-  <section id="contact">
-    <div class="section-label">Contact</div>
-    <div class="links">
-      <a href="mailto:aghayev0003@gmail.com">Email</a>
-      <a href="https://github.com/aghayev3" target="_blank" rel="noopener">GitHub</a>
-      <a href="https://linkedin.com/in/babak-aghayev" target="_blank" rel="noopener">LinkedIn</a>
-    </div>
-  </section>
-
-  <footer>
-    <span>&copy; 2026 Babak Aghayev</span>
-    <span><a href="https://github.com/aghayev3/aghayev3.github.io" target="_blank" rel="noopener">Source</a></span>
-  </footer>
-
+<div class="masthead">
+  <a href="assets/chubb-engraving.jpg"><img src="assets/chubb-engraving.jpg" width="1920" height="1005" alt="Engraving of a Chubb lock, around 1850"></a>
+  <h1>Babak Aghayev</h1>
+  <div class="tagline"><i>Web Application Security Testing for Startups and Small Businesses</i></div>
+  <p class="nav">[ <a href="#services">Services</a> | <a href="#try">Try It</a> | <a href="#results">Results</a> | <a href="#new">What's New</a> | <a href="#contact">Contact</a> ]</p>
 </div>
+
+<hr class="thick">
+
+<p>I test web apps for startups and small businesses, and find the holes before attackers do. I am taking freelance work now.</p>
+<p><a class="btn" href="https://linkedin.com/in/babak-aghayev">Connect on LinkedIn</a></p>
+
+<h2>Every lock gets tested</h2>
+<div class="figure">
+  <a href="assets/chubb-lever.jpg"><img src="assets/chubb-lever.jpg" width="1138" height="1510" alt="Encyclopedia drawing of a Chubb lock lever and key" loading="lazy"></a>
+  The Chubb lock's lever.<br>[<a href="assets/chubb-lever.jpg">full size</a>]
+</div>
+<p>In 1851, at the Great Exhibition in London, an American locksmith named Alfred Hobbs opened a Chubb lock in front of witnesses. It had been sold as unpickable.</p>
+<p>Locks got better because someone tested them in public. Your web app works the same way. Someone will test it. It is better if that someone works for you.</p>
+<div class="clear"></div>
+
+<hr>
+
+<h2 id="services">Services</h2>
+<table class="bevel">
+  <tr><th>Service</th><th>What you get</th></tr>
+  <tr><td class="n">Test</td><td>I attack your web app the way a real attacker would: sign-up and login, who can see what, payments, file uploads, and every form people type into.</td></tr>
+  <tr><td class="n">Report</td><td>Every problem written in plain words: what it is, how bad it is, how I found it, and exactly how to fix it.</td></tr>
+  <tr><td class="n">Retest</td><td>Once your team has fixed the findings, I test again and confirm each fix holds.</td></tr>
+</table>
+<p class="small" style="margin-top:8px"><b>Add-on:</b> if you can share your source code, I use it to test faster and go deeper.</p>
+
+<hr>
+
+<h2 id="try">Try the most common hole</h2>
+<p>This is a pretend shop. You are signed in and looking at your own order, number 1041. Change the number and press <b>Submit Query</b>. A well-built app refuses. A lot of real apps do not.</p>
+
+<div class="win" data-idor data-path="/cgi-bin/orders.cgi?id=" data-ui>
+  <div class="title">Order Lookup</div>
+  <div class="body">
+    <form>
+      <label for="order">Order number:</label>
+      <input id="order" name="order" type="text" value="1041" inputmode="numeric">
+      <button type="submit">Submit Query</button>
+    </form>
+    <pre><code data-out>GET /cgi-bin/orders.cgi?id=1041
+Cookie: session=yours
+
+HTTP/1.1 200 OK
+{ "order": 1041, "customer": "You" }</code></pre>
+    <p data-verdict>Your own order. Now change the number to 1042.</p>
+  </div>
+</div>
+
+<hr>
+
+<h2 id="results">Results so far</h2>
+<table class="bevel">
+  <tr><th>Result</th><th>What for</th><th>When</th></tr>
+  <tr><td class="n">1st of 60</td><td>ACC Technion Blue Team Programme, Cohort 7. Chosen from more than 2,100 applicants. Graduated with honours.</td><td>2026</td></tr>
+  <tr><td class="n">Top 5</td><td>Selected for a one-month cybersecurity internship in Israel.</td><td>Fall 2026</td></tr>
+  <tr><td class="n">2nd</td><td>IDRIS, the capstone project I led. Nominated to CyberPark.</td><td>2026</td></tr>
+  <tr><td class="n">3.8 GPA</td><td>B.S. Computer Science, magna cum laude. University of Mary Hardin-Baylor. [<a href="certs/undergraduate_diploma.png">diploma</a>]</td><td>2024</td></tr>
+</table>
+
+<h3>Certificates</h3>
+<ul>
+  <li><a href="certs/security_plus.png">CompTIA Security+</a> (Nov 2025)</li>
+  <li><a href="certs/google_cybersecurity.png">Google Cybersecurity</a> (Sep 2025)</li>
+  <li><a href="certs/google_it_automation_with_python.png">Google IT Automation with Python</a> (Apr 2025)</li>
+  <li><a href="certs/google_ai_essentials.png">Google AI Essentials</a> and <a href="certs/google_prompting_essentials.png">Google Prompting Essentials</a> (Apr 2025)</li>
+  <li><a href="certs/google_it_support.png">Google IT Support</a> (Mar 2025)</li>
+  <li><a href="certs/cs50x.png">Harvard CS50x</a> (2024)</li>
+  <li><a href="certs/ccna.png">Cisco CCNA</a> (Apr 2023)</li>
+</ul>
+
+<hr>
+
+<h2 id="new">What's New</h2>
+<dl>
+  <dt><b>Now</b></dt>
+  <dd>Working through the PortSwigger Web Security Academy, the training ground built by the makers of Burp Suite. Next goal: the Burp Suite Certified Practitioner exam.</dd>
+  <dt><b>Fall 2026</b></dt>
+  <dd>One-month cybersecurity internship in Israel.</dd>
+  <dt><b>July 2026</b></dt>
+  <dd>Graduated 1st of 60 from the ACC Technion Blue Team Programme. [<a href="certs/technion_diploma.jpg">diploma</a>]</dd>
+  <dt><b>November 2025</b></dt>
+  <dd>Passed CompTIA Security+.</dd>
+</dl>
+
+<hr>
+
+<h2 id="contact">Contact</h2>
+<p>Tell me about your app.</p>
+<ul>
+  <li><b><a href="https://linkedin.com/in/babak-aghayev">Connect on LinkedIn</a></b> (best way to reach me)</li>
+  <li>E-mail: <a href="mailto:aghayev0003@gmail.com">aghayev0003@gmail.com</a></li>
+  <li>Code: <a href="https://github.com/aghayev3">github.com/aghayev3</a></li>
+</ul>
+
+<hr class="thick">
+
+<address>Babak Aghayev &lt;<a href="mailto:aghayev0003@gmail.com">aghayev0003@gmail.com</a>&gt;</address>
+<p class="small">Last modified: October 28, 2026. You have visited this page <span class="counter" id="visits">1</span> <span id="times">time</span> from this browser.</p>
+<p class="small">Pictures via Wikimedia Commons: <a href="https://commons.wikimedia.org/wiki/File:Chubb_lock.jpg">"Chubb lock"</a> and <a href="https://commons.wikimedia.org/wiki/File:Chubb_lock,_Otto%27s_Encyclopedia.jpg">"Chubb lock, Otto's Encyclopedia"</a>, public domain.</p>
+<p><a class="badge" href="https://www.anybrowser.org/campaign/" title="Viewable with any browser">VIEWABLE WITH<b>ANY BROWSER</b></a></p>
+
+<script src="assets/demo.js"></script>
+<script>
+  // The counter counts only this visitor's own visits, kept in their browser.
+  try {
+    var n = parseInt(localStorage.getItem('visits') || '0', 10) + 1;
+    localStorage.setItem('visits', String(n));
+    document.getElementById('visits').textContent = String(n).padStart(6, '0');
+    document.getElementById('times').textContent = n === 1 ? 'time' : 'times';
+  } catch (e) {}
+</script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 # Direction: Netscape, 1996
 
-Chosen 2026-10-28 from four previews. Reference build: `previews/4-netscape/index.html`.
+Chosen 2026-10-28 from four previews. Built as the live site: `index.html`.
 
 ## The idea
 
@@ -48,7 +48,7 @@ The content idea runs through it: **every lock gets tested.** In 1851 Alfred Hob
 
 ## The live thing
 
-The order-number demo, as a 1990s CGI form: `GET /cgi-bin/orders.cgi?id=1041`, a "Submit Query" button, the raw response in an inset white panel. Changing 1041 to 1042 shows a stranger's order and names the bug: broken access control, the top risk on the OWASP Top 10. Script: `previews/shared/demo.js`.
+The order-number demo, as a 1990s CGI form: `GET /cgi-bin/orders.cgi?id=1041`, a "Submit Query" button, the raw response in an inset white panel. Changing 1041 to 1042 shows a stranger's order and names the bug: broken access control, the top risk on the OWASP Top 10. Script: `assets/demo.js`.
 
 ## Motion
 
@@ -65,10 +65,9 @@ Taste's house rules ban thin rules, monospace, bordered tables, default link col
 
 ## Pictures
 
-Two public-domain engravings from Wikimedia Commons, credited in the footer: "Chubb lock" (`previews/assets/chubb-engraving.jpg`) and "Chubb lock, Otto's Encyclopedia" (`previews/assets/chubb-lever.jpg`). Credits in `previews/assets/credits.json`.
+Two public-domain engravings from Wikimedia Commons, credited in the footer: "Chubb lock" (`assets/chubb-engraving.jpg`) and "Chubb lock, Otto's Encyclopedia" (`assets/chubb-lever.jpg`). Credits in `assets/credits.json`.
 
 ## Open before launch
 
-- Add a favicon (the live site's only console error is likely the missing one).
 - Decide whether to show a PortSwigger progress figure (only with real numbers) and whether to state the BSCP exam as a goal.
 - Optional: one or two lab writeups on GitHub to link from What's New.
