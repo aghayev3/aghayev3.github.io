@@ -31,7 +31,7 @@ Open decision: pricing, engagement length, and how an engagement starts have not
 
 ## Operating Context
 
-- Preparing for the Burp Suite Certified Practitioner (BSCP) exam. The site states this as the current goal. Decided 2026-10-28: the site names BSCP but does not mention PortSwigger or the Web Security Academy, and shows no lab progress figures. Lab writeups on GitHub remain an option.
+- Working through the PortSwigger Web Security Academy labs and preparing for the Burp Suite Certified Practitioner (BSCP) exam. Decided 2026-10-28: the site's What's New "Now" entry says both, and shows no lab progress figures. Lab writeups on GitHub remain an option.
 - One-month cybersecurity internship in Israel planned for Fall 2026.
 - Decided 2026-10-28: IDRIS (the capstone project) is not mentioned on the site.
 
